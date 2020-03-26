@@ -1,0 +1,12 @@
+<p>testimonials works!</p>
+
+
+
+<div *ngIf="users">
+
+<ul>
+    <li *ngFor="let user of users">
+      {{user.testimonial.text}}
+    </li>
+  </ul>
+</div>
