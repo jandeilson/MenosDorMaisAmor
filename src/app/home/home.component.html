@@ -1,1 +1,42 @@
-<p>home works!</p>
+<!-- Flickity HTML init -->
+
+{{ testimonialsCarousel () }}
+
+<style>
+    .gallery {
+background: #EEE;
+}
+
+.carousel-cell{
+width: 28%;
+height: 200px;
+margin-right: 10px;
+background: #8C8;
+counter-increment: gallery-cell;
+}
+
+.carousel-cell.is-selected {
+background: #ED2;
+}
+
+/* cell number */
+.carousel-cell:before {
+display: block;
+text-align: center;
+content: counter(gallery-cell);
+line-height: 200px;
+font-size: 80px;
+color: white;
+}
+</style>
+
+<div id="testimonials-carousel" data-flickity='{ "autoPlay": true }'>
+    <div class="carousel-cell">asdsadas</div>
+    <div class="carousel-cell">asdasdas</div>
+    <div class="carousel-cell">asdsad</div>
+    <div class="carousel-cell">asdsad</div>
+    <div class="carousel-cell">asdasd</div>
+  </div>
+
+
+ 

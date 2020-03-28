@@ -9,7 +9,6 @@ import { TestimonialsModule } from './testimonials/testimonials.module'
 import { LayoutModule } from './layout/layout.module'
 
 import { AppComponent } from './app.component';
-import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
