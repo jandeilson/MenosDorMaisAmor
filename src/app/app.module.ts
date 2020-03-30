@@ -7,8 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TestimonialsModule } from './testimonials/testimonials.module'
 import { LayoutModule } from './layout/layout.module'
+import { HomeModule } from './home/home.module';
 
 import { AppComponent } from './app.component';
+
+
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { AppComponent } from './app.component';
     AppRoutingModule,
     NgbModule,
     TestimonialsModule,
+    HomeModule,
     LayoutModule,
     HttpClientModule
   ],

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TestimonialsService } from './testimonials.service';
 import { Person } from 'src/app/models/person.model';
 
+
 @Component({
   selector: 'testimonials',
   templateUrl: './testimonials.component.html'

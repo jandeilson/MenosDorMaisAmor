@@ -1,0 +1,15 @@
+#footer {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(assets/images/bg-footer.jpg);
+    background-repeat: no-repeat;
+    background-position: 50% 85%;
+    background-size: 160%;
+    color: $white;
+    padding: 3rem;
+
+    .logo {
+        height: auto;
+        width: 128px;
+        margin: auto;
+        padding-bottom: 1rem;
+    }
+}

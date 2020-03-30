@@ -1,0 +1,27 @@
+#home {
+    @import 'assets/scss/blocks/home/carousel.scss';
+
+    .cta {
+        padding: 3rem 0;
+    }
+    
+    .help-needy {
+        background: linear-gradient(6.84deg, rgba(0, 0, 0, 0.6) 2%, rgba(255, 255, 255, 0) 162.80%), linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(assets/images/bg-home-cta-needy.jpg);
+        background-repeat: no-repeat;
+        background-position: 50% 85%;
+        background-size: 160%;
+        border-radius: 7px;
+        color: $white;
+        padding: 10% 5%;
+        margin-bottom: -125px;
+        position: relative;
+    }
+
+    .testimonials {
+        padding-top: 100px;
+        background: #f2f2f2;
+        margin: 0 0 -15px 0;
+        padding-bottom: 3rem;
+    }
+}
+

@@ -1,0 +1,66 @@
+.owl-stage {
+    &:nth-child(1) {
+        margin-left: -145px;
+    }
+}
+
+.testimonials-carousel {
+    width: 550px;
+    display: block;
+
+    .carousel-block {
+        height: 320px;
+        border-radius: 7px;
+        padding: 3px;
+        counter-increment: gallery-cell;
+        background: $default-green-gradient;
+        opacity: 1;
+        cursor: pointer;
+
+        .content {
+            padding: 25px 20px;
+            border-radius: 7px;
+            height: 314px;
+            background-color: $white;
+
+            .user-testimonial {
+                height: 220px;
+                p {
+                    font-size: 0.92rem;
+                }
+            }
+            .user-info {
+                height: 60px;
+                h5 {
+                    font-size: 1.1rem;
+                }
+                h6 {
+                    color: #9C9C9C;
+                }
+            }
+        }
+
+
+        &.is-selected {
+            .content {
+                background-color: $white;
+                -webkit-transition: background-color 0.75s ease-out;
+                -moz-transition: background-color 0.75s ease-out;
+                -o-transition: background-color 0.75s ease-out;
+                transition: background-color 0.75s ease-out;
+            }
+        }
+        
+    }
+
+    // Breakpoints
+    $breakpoint-mobile: 375px;
+
+    @media only screen and (min-width: $breakpoint-mobile) {
+       
+    }
+
+    @media only screen and (max-width: $breakpoint-mobile) {
+        
+    }
+}

@@ -1,42 +1,44 @@
-<!-- Flickity HTML init -->
+<section id="home">
+    <div class="carousel">
+        <div class="container">
+            <owl-carousel-o [options]="customOptions" class="testimonials-carousel">
+                <ng-container *ngFor="let user of users">
+                    <ng-template carouselSlide [id]="user.id">
+                        <div class="carousel-block">
+                            <div class="content">
+                                <div class="user-testimonial">
+                                    <p>
+                                        {{ user.testimonial.text | summary}}
+                                    </p>
+                                </div>
+                                <div class="user-info">
+                                    <h5 class="font-weight-bold">{{ user.firstName }} {{ user.lastName }}</h5>
+                                    <h6>{{ user.testimonial.state }}</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </owl-carousel-o>
+        </div>
+    </div>
 
-{{ testimonialsCarousel () }}
+    <div class="cta">
+        <div class="container">
+            <div class="help-needy text-center">
+                <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
+                <button routerLink="/testimonials" class="btn btn-light">Preciso de ajuda!</button>
+            </div>
+        </div>
+    </div>
 
-<style>
-    .gallery {
-background: #EEE;
-}
-
-.carousel-cell{
-width: 28%;
-height: 200px;
-margin-right: 10px;
-background: #8C8;
-counter-increment: gallery-cell;
-}
-
-.carousel-cell.is-selected {
-background: #ED2;
-}
-
-/* cell number */
-.carousel-cell:before {
-display: block;
-text-align: center;
-content: counter(gallery-cell);
-line-height: 200px;
-font-size: 80px;
-color: white;
-}
-</style>
-
-<div id="testimonials-carousel" data-flickity='{ "autoPlay": true }'>
-    <div class="carousel-cell">asdsadas</div>
-    <div class="carousel-cell">asdasdas</div>
-    <div class="carousel-cell">asdsad</div>
-    <div class="carousel-cell">asdsad</div>
-    <div class="carousel-cell">asdasd</div>
-  </div>
-
-
- 
+    <div class="testimonials">
+        <div class="container">
+            <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
+    
+            <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
+        
+            <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
+        </div>
+    </div>
+</section>

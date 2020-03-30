@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+/*
+
+Styles Structure
+
+*/
+
+/* Globals */
+@import 'assets/fonts/fonts.scss';
+@import 'assets/scss/colors.scss';
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Blocks */
+// > Home
+@import 'assets/scss/blocks/home/global.scss';
+
+// > Header
+@import 'assets/scss/blocks/header/logo.scss';
+
+// > Footer
+@import 'assets/scss/blocks/footer.scss';
