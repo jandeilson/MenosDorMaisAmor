@@ -8,6 +8,16 @@ export class TestimonialNeedyFormComponent implements OnInit {
 
   constructor() { }
 
+  submit(f) {
+    console.log(f)
+  }
+
+
+  formStep: boolean = false;
+  formSteps() {
+    this.formStep = !this.formStep;  
+  }
+
   ngOnInit(): void {
   }
 

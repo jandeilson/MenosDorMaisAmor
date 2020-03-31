@@ -8,16 +8,28 @@ Styles Structure
 @import 'assets/fonts/fonts.scss';
 @import 'assets/scss/colors.scss';
 
+
 body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Blocks */
-// > Home
-@import 'assets/scss/blocks/home/global.scss';
+.container {
+    &.default {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
+/***/
 
-// > Header
-@import 'assets/scss/blocks/header/logo.scss';
+/* Layout */
 
-// > Footer
-@import 'assets/scss/blocks/footer.scss';
+// Spacings
+$spacing-between-fc: 0 0 50px 0;
+
+@import 'assets/scss/layout/header/logo.scss';
+@import 'assets/scss/layout/footer.scss';
+/***/
+
+/* Components */
+@import 'assets/scss/components/home/global.scss';
+@import 'assets/scss/components/testimonials/forms.scss';

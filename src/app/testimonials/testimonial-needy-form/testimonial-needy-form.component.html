@@ -1,41 +1,62 @@
-<form>
-    <h3>Conte sua história!</h3>
-    <div class="form-group">
-        <label for="testimonial"></label>
-        <textarea id="testimonial" name="testimonial" cols="30" rows="10" placeholder="Escreve sua história" class="form-control"></textarea>
-    </div>
-    <div class="form-group">
-        <label for="file"></label>
-        <input type="file" id="mediaUpload" name="media" accept="">
-    </div>
+<section id="needy-form">
+    <div class="container default">
+        <form #f="ngForm" (ngSubmit)="submit(f)" class="form">
 
-    <!-- Next Step -->
-    <h3>Para que possam te ajudar, precisamos das seguintes informações:</h3>
-    <div class="form-group">
-        <label for="firstName"></label>
-        <input id ="firstName" type="text" placeholder="Nome" class="form-control">
+            <div class="step" [ngClass]="formStep ? '' : 'currentStep'">
+                <h3>Conte sua história!</h3>
+                <div class="form-group">
+                    <label for="testimonial"></label>
+                    <textarea id="testimonial" name="testimonial" cols="30" rows="10" placeholder="Escreve sua história" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="file"></label>
+                    <input type="file" id="mediaUpload" name="media" accept="">
+                </div>    
+
+                <button class="btn btn-primary" (click)="formSteps()">Próximo passo</button>
+            </div>
+
+            <div class="step" [ngClass]="formStep ? 'currentStep' : ''">
+                <h3>Para que possam te ajudar, precisamos das seguintes informações:</h3>
+                <div class="form-group">
+                    <label for="firstName"></label>
+                    <input 
+                        ngModel
+                        required 
+                        name="firstName" 
+                        #firstName="ngModel"
+                        id="firstName" type="text" placeholder="Nome" class="form-control">
+                    <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+                        <div *ngIf="firstName.errors.required">Name is required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName"></label>
+                    <input id ="lastName" type="text" placeholder="Sobrenome" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Email"></label>
+                    <input id ="email" type="email" placeholder="E-mail" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="Telefone"></label>
+                    <input id ="telefone" type="text" placeholder="Telefone" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="state"></label>
+                    <select class="form-control" id="state" placeholder="Estado">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                    </select>
+                </div> 
+            
+                <button class="btn btn-primary" (click)="formSteps()">Passo anterior</button>
+                <button class="btn btn-primary" [disabled]="!f.valid">Enviar</button>
+            </div>
+
+            <p> {{ f.value | json }} </p>
+        </form>
     </div>
-    <div class="form-group">
-        <label for="lastName"></label>
-        <input id ="lastName" type="text" placeholder="Sobrenome" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="Email"></label>
-        <input id ="email" type="email" placeholder="E-mail" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="Telefone"></label>
-        <input id ="telefone" type="text" placeholder="Telefone" class="form-control">
-    </div>
-    <div class="form-group">
-        <label for="state"></label>
-        <select class="form-control" id="state" placeholder="Estado">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-        </select>
-    </div> 
-    
-    <button class="btn btn-primary">Enviar</button>
-</form>
+</section>

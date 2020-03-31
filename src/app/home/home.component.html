@@ -1,6 +1,6 @@
 <section id="home">
     <div class="carousel">
-        <div class="container">
+        <div class="container default">
             <owl-carousel-o [options]="customOptions" class="testimonials-carousel">
                 <ng-container *ngFor="let user of users">
                     <ng-template carouselSlide [id]="user.id">
@@ -24,16 +24,16 @@
     </div>
 
     <div class="cta">
-        <div class="container">
+        <div class="container default">
             <div class="help-needy text-center">
                 <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
-                <button routerLink="/testimonials" class="btn btn-light">Preciso de ajuda!</button>
+                <button routerLink="/help" class="btn btn-light">Preciso de ajuda!</button>
             </div>
         </div>
     </div>
 
     <div class="testimonials">
-        <div class="container">
+        <div class="container default">
             <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
     
             <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>

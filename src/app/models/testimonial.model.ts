@@ -2,10 +2,10 @@
 import { Deserializable } from 'src/app/models/deserializable.model';
 
 export class Testimonial implements Deserializable {
-    id: Number;
-    created: Number;
-    state: String;
-    text: String;
+    id: number;
+    created:number;
+    state: string;
+    text: string;
     media: {
         photos: any[];
         videos: any[];

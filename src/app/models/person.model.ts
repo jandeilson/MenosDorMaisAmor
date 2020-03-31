@@ -2,10 +2,10 @@ import { Testimonial } from 'src/app/models/testimonial.model';
 import { Deserializable } from 'src/app/models/deserializable.model';
 
 export class Person implements Deserializable {
-    id: Number;
-    name: String;
-    email: String;
-    phone: Number;
+    id: number;
+    name: string;
+    email: string;
+    phone: number;
     testimonial?: Testimonial[];
 
     deserialize(input: any): this {
