@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TestimonialsService } from './../testimonials/testimonials.service';
-import { Person } from '../models/person.model';
+import { Apollo } from "apollo-angular";
+import gql from "graphql-tag";
 import { OwlOptions } from 'ngx-owl-carousel-o';
-
 
 @Component({
   selector: 'home',
@@ -18,30 +17,68 @@ export class HomeComponent implements OnInit {
     margin: 30,
     pullDrag: true,
     dots: false,
-    navSpeed: 700,
-    navText: ['', ''],
     nav: false,
     responsive: {
-      0:{
-        items:3
-      },
-      600:{
-        items:3
-      },
-      1000:{
-         items:5
-      }
+      0:{ items:3 },
+      600:{ items:3 },
+      1000:{ items:5 }
     },
   }
 
-  public users: Person[];
+  public users: any[];
+  
+  loading = true;
   testimonialsCarousel: any;
 
-  constructor(private TestimonialsService: TestimonialsService) {
-    this.TestimonialsService.getAllUsers().subscribe(users => this.users = users);
-  }
+  constructor(private apollo: Apollo) { }
 
   ngOnInit(): void {
+    this.apollo
+      .query<any>({
+        query: gql`
+        {
+          userMany {
+            _id
+            firstName
+            lastName
+            email
+            phone
+            testimonial
+          }
+          testimonialMany {
+            user
+            text
+            state
+            city
+            media
+          }
+        }
+        `
+      })
+      .subscribe(
+        ({ data, loading }) => {
+          const usersQuery = data.userMany;
+          const testimonialsQuery = data.testimonialMany;
+         
+          this.loading = loading;
+
+          const m = new Map();
+          
+          usersQuery.forEach(function(x) { 
+            x.testimonial = null; m.set(x._id, x);
+          });
+          
+          testimonialsQuery.forEach(function(x) {
+            let existing = m.get(x.user);
+            if (existing === undefined) 
+              m.set(x.user, x);
+            else 
+              Object.assign(existing, { testimonial: [x] });
+          });
+
+          this.users = usersQuery;
+        }
+      );
   }
 
 }

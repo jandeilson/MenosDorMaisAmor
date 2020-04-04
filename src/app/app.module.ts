@@ -10,6 +10,7 @@ import { LayoutModule } from './layout/layout.module'
 import { HomeModule } from './home/home.module';
 
 import { AppComponent } from './app.component';
+import { GraphQLModule } from './graphql.module';
 
 
 
@@ -24,7 +25,8 @@ import { AppComponent } from './app.component';
     TestimonialsModule,
     HomeModule,
     LayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    GraphQLModule
   ],
   providers: [],
   bootstrap: [AppComponent]
