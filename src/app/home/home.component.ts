@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
     dots: false,
     nav: false,
     responsive: {
-      0:{ items:3 },
+      0:{ items: 2 },
       600:{ items:3 },
       1000:{ items:5 }
     },
@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
   public users: any[];
   
-  loading = true;
+  loading: boolean = true;
   testimonialsCarousel: any;
 
   constructor(private apollo: Apollo) { }
@@ -43,14 +43,12 @@ export class HomeComponent implements OnInit {
             lastName
             email
             phone
-            testimonial
           }
           testimonialMany {
             user
             text
             state
             city
-            media
           }
         }
         `
@@ -64,12 +62,14 @@ export class HomeComponent implements OnInit {
 
           const m = new Map();
           
-          usersQuery.forEach(function(x) { 
-            x.testimonial = null; m.set(x._id, x);
+          usersQuery.forEach((x:any) => {
+            x.testimonial; 
+            m.set(x._id, x);
           });
           
-          testimonialsQuery.forEach(function(x) {
+          testimonialsQuery.forEach((x:any) => {
             let existing = m.get(x.user);
+            
             if (existing === undefined) 
               m.set(x.user, x);
             else 

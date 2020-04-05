@@ -27,23 +27,19 @@ export const TestimonialSchema = new Schema(
         },
         media: {
             type: Array,
-            photo: {
-                type: Array
-            },
-            video: {
-                type: Array
-            },
-            audio: {
-                type: Array
-            },
             trim: true,
-            required: true
+            required: true,
+                photo: [{"name": "value"}],
+                video: [],
+                audio: [],
         }
     },
     {
         collection: 'testimonials',
     }
 );
+
+
 
 TestimonialSchema.plugin(timestamps);
 

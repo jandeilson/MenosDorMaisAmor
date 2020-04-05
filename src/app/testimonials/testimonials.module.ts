@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TestimonialsComponent } from './testimonials.component';
 import { TestimonialDetailComponent } from './testimonial-detail/testimonial-detail.component';
@@ -16,6 +16,7 @@ import { TestimonialNeedyFormComponent } from './testimonial-needy-form/testimon
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     FormsModule
   ]
 })

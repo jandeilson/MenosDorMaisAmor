@@ -1,62 +1,105 @@
 <section id="needy-form">
     <div class="container default">
-        <form #f="ngForm" (ngSubmit)="submit(f)" class="form">
-
-            <div class="step" [ngClass]="formStep ? '' : 'currentStep'">
-                <h3>Conte sua história!</h3>
-                <div class="form-group">
-                    <label for="testimonial"></label>
-                    <textarea id="testimonial" name="testimonial" cols="30" rows="10" placeholder="Escreve sua história" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="file"></label>
-                    <input type="file" id="mediaUpload" name="media" accept="">
-                </div>    
-
-                <button class="btn btn-primary" (click)="formSteps()">Próximo passo</button>
-            </div>
-
-            <div class="step" [ngClass]="formStep ? 'currentStep' : ''">
-                <h3>Para que possam te ajudar, precisamos das seguintes informações:</h3>
-                <div class="form-group">
-                    <label for="firstName"></label>
-                    <input 
-                        ngModel
-                        required 
-                        name="firstName" 
-                        #firstName="ngModel"
-                        id="firstName" type="text" placeholder="Nome" class="form-control">
-                    <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
-                        <div *ngIf="firstName.errors.required">Name is required.</div>
+        <div class="form-block">
+            <form [formGroup]="form" #f="ngForm" (ngSubmit)="submit(f)" class="form">
+            
+                <div formGroupName="testimonial">
+                    <div class="step" [ngClass]="formStep ? '' : 'currentStep'">
+                        <h3>Conte sua história!</h3>
+                        <div class="form-group">
+                            <label for="textTestimonial"></label>
+                            <textarea 
+                                formControlName="textTestimonial" name="textTestimonial" 
+                                id="textTestimonial" cols="30" rows="10" placeholder="Escreve sua história" class="form-control"></textarea>
+                            
+                            <div *ngIf="fieldValidation.testimonial.touched && fieldValidation.testimonial.invalid" class="alert alert-danger">
+                                <div *ngIf="fieldValidation.testimonial.errors.required">Precisamos do seu depoimento.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mediaPhotos"></label>
+                            <input 
+                                formArrayName="mediaPhotos" name="mediaPhotos" 
+                                type="file" id="mediaPhotos" (change)="detectFiles($event)" accept="image/*" multiple>
+                        </div>     
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="lastName"></label>
-                    <input id ="lastName" type="text" placeholder="Sobrenome" class="form-control">
+    
+                <div class="step" [ngClass]="formStep ? 'currentStep' : ''">
+                    <div formGroupName="user">
+                        <h3>Para que possam te ajudar, precisamos das seguintes informações:</h3>
+                        <div class="form-group">
+                            <label for="firstName"></label>
+                            <input 
+                                formControlName="firstName" name="firstName" 
+                                id="firstName" type="text" placeholder="Nome" class="form-control">
+                        
+                            <div *ngIf="fieldValidation.firstName.touched && fieldValidation.firstName.invalid" class="alert alert-danger">
+                                <div *ngIf="fieldValidation.firstName.errors.required">Precisamos do seu primeiro nome.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName"></label>
+                            <input 
+                                formControlName="lastName" name="lastName"
+                                id ="lastName" type="text" placeholder="Sobrenome" class="form-control">
+    
+                            <div *ngIf="fieldValidation.lastName.touched && fieldValidation.lastName.invalid" class="alert alert-danger">
+                                <div *ngIf="fieldValidation.lastName.errors.required">Precisamos do seu segundo nome.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Email"></label>
+                            <input 
+                                formControlName="email" name="email"
+                                id ="email" type="email" placeholder="E-mail" class="form-control">
+    
+                            <div *ngIf="fieldValidation.email.touched && fieldValidation.email.invalid" class="alert alert-danger">
+                                <div *ngIf="fieldValidation.email.errors.required">Precisamos do seu e-mail.</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"></label>
+                            <input 
+                                formControlName="phone" name="phone"
+                                id="phone" type="number" placeholder="Telefone" class="form-control">
+                            
+                            <div *ngIf="fieldValidation.phone.touched && fieldValidation.phone.invalid" class="alert alert-danger">
+                                <div *ngIf="fieldValidation.phone.errors.required">Precisamos do seu telefone.</div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div formGroupName="testimonial">
+                        <div class="form-group">
+                            <label for="state"></label>
+                            <select 
+                                formControlName="state" name="state"
+                                class="form-control" id="state" placeholder="Estado">
+                                <option></option>
+                                <option value="stateTest">1</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="city"></label>
+                            <select 
+                                formControlName="city" name="city"
+                                class="form-control" id="city" placeholder="Cidade">
+                                <option></option>
+                                <option value="cityTest">1</option>
+                            </select>
+                        </div> 
+                    </div>
+    
+                    
+                    <button class="btn btn-primary">Enviar</button>
                 </div>
-                <div class="form-group">
-                    <label for="Email"></label>
-                    <input id ="email" type="email" placeholder="E-mail" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="Telefone"></label>
-                    <input id ="telefone" type="text" placeholder="Telefone" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label for="state"></label>
-                    <select class="form-control" id="state" placeholder="Estado">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                    </select>
-                </div> 
-            
-                <button class="btn btn-primary" (click)="formSteps()">Passo anterior</button>
-                <button class="btn btn-primary" [disabled]="!f.valid">Enviar</button>
-            </div>
+    
+            </form>
 
-            <p> {{ f.value | json }} </p>
-        </form>
+            <button class="btn btn-primary" (click)="formSteps()">{{ formStepText }}</button>
+        <p> {{ f.value | json }} </p>
+        </div>
+        
     </div>
 </section>
