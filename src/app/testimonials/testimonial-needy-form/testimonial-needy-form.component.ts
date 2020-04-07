@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms'
 import { Apollo } from 'apollo-angular';
-import { mutationUser, mutationTestimonial, CreateMutationResponse} from './graphql';
-import { User } from './graphql/types';
+import { mutationUser, mutationTestimonial, queryStates, queryCities, CreateMutationResponse} from './graphql';
+
+
 
 @Component({
   selector: 'testimonial-needy-form',
@@ -15,13 +16,48 @@ export class TestimonialNeedyFormComponent implements OnInit {
   formStep: boolean = false;
   formStepText = 'Prosseguir';
 
+  public states: any[];
+  public cities: any[];
+  public stateId: string;
+
+  constructor(private apollo: Apollo) { }
+  
+
   formSteps() {
     this.formStep = !this.formStep;
 
     !this.formStep ? this.formStepText = 'Prosseguir' : this.formStepText = 'Anterior';
   }
 
-  constructor(private apollo: Apollo) { }
+  citiesState(event) {
+    const elSelected = event.target;
+    const value = elSelected.options[elSelected.selectedIndex].getAttribute('state-id');
+    const stateId = value;
+
+    this.loading = !this.loading;
+
+    // Get "cities" from database based in "state id" when state field selected
+    const getCities = (id: string) => {
+      this.apollo
+      .query<any>({
+        query: queryCities,
+        variables: {
+          stateId: id,
+        }
+      })
+      .subscribe(
+        ({ data, loading }) => {
+          setTimeout(() => {
+            this.cities = data.cityMany;
+            this.loading = loading;
+          }, 2000);
+        }
+      );
+    }
+
+    getCities(stateId);
+
+  }
 
   // Form groups
   form = new FormGroup({
@@ -77,6 +113,7 @@ export class TestimonialNeedyFormComponent implements OnInit {
     }
   }
 
+  // actions input submit 
   submit(f) {
     const formValue = f.form.value;
     
@@ -97,6 +134,7 @@ export class TestimonialNeedyFormComponent implements OnInit {
       console.error(error);
     });
 
+    // After submit "user mutation" and get "user id" call "testimonial mutation"
     const callMutationTestimonial = (userId: any) => {
 
       this.apollo
@@ -116,12 +154,25 @@ export class TestimonialNeedyFormComponent implements OnInit {
       });
       
     }
-
-    
   }
 
-
   ngOnInit(): void {
+
+    // Start a query with all states
+    // TODO maybe call this only when user click next step
+
+    this.apollo
+      .query<any>({
+        query: queryStates
+      })
+      .subscribe(
+        ({ data, loading }) => {
+          this.states = data.stateMany;
+          this.loading = loading;
+          console.log(this.stateId)
+        }
+      );
+
   }
 
 }

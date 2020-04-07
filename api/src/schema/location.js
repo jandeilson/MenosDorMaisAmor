@@ -1,5 +1,6 @@
-import { State, StateTC } from '../models/location';
+import { State, StateTC, City, CityTC } from '../models/location';
 
+// State schema
 const StateQuery = {
     stateById: StateTC.getResolver('findById'),
     stateByIds: StateTC.getResolver('findByIds'),
@@ -10,15 +11,16 @@ const StateQuery = {
     statePagination: StateTC.getResolver('pagination'),
 };
 
-const StateMutation = {
-    stateCreateOne: StateTC.getResolver('createOne'),
-    stateCreateMany: StateTC.getResolver('createMany'),
-    stateUpdateById: StateTC.getResolver('updateById'),
-    stateUpdateOne: StateTC.getResolver('updateOne'),
-    stateUpdateMany: StateTC.getResolver('updateMany'),
-    stateRemoveById: StateTC.getResolver('removeById'),
-    stateRemoveOne: StateTC.getResolver('removeOne'),
-    stateRemoveMany: StateTC.getResolver('removeMany'),
+// City Schema
+const CityQuery = {
+    cityById: CityTC.getResolver('findById'),
+    cityByIds: CityTC.getResolver('findByIds'),
+    cityOne: CityTC.getResolver('findOne'),
+    cityMany: CityTC.getResolver('findMany'),
+    cityCount: CityTC.getResolver('count'),
+    cityConnection: CityTC.getResolver('connection'),
+    cityPagination: CityTC.getResolver('pagination'),
 };
 
-export { StateQuery, StateMutation };
+
+export { StateQuery, CityQuery };

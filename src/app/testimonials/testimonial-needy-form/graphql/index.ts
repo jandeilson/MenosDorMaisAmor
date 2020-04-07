@@ -48,6 +48,28 @@ mutation ($user: MongoID!, $text: String!, $state: String!, $city: String!, $med
 }
 `;
 
+
+export const queryStates = gql`
+query {
+  stateMany {
+    _id
+    initials
+    name
+  }
+}
+`;
+
+
+export const queryCities = gql`
+query ($stateId: String!) {
+  cityMany (filter: {state: $stateId}) {
+    _id
+    name
+    state
+  }
+}
+`;
+
 export interface CreateMutationResponse {
   user: User;
   testimonial: Testimonial;

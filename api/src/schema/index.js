@@ -5,13 +5,14 @@ import db from '../utils/db'; // eslint-disable-line no-unused-vars
 const schemaComposer = new SchemaComposer();
 
 import { UserQuery, UserMutation } from './user';
-import { StateQuery } from './location';
+import { StateQuery, CityQuery} from './location';
 import { TestimonialQuery, TestimonialMutation } from './testimonial';
 
 schemaComposer.Query.addFields({
     ...UserQuery,
     ...TestimonialQuery,
-    ...StateQuery
+    ...StateQuery,
+    ...CityQuery
 });
 
 schemaComposer.Mutation.addFields({
