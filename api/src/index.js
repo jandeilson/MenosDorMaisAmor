@@ -7,10 +7,12 @@ import mongoose from 'mongoose';
 import './utils/db';
 import schema from './schema';
 
+
 dotenv.config();
 
 const app = express();
 
+// Default server
 const server = new ApolloServer({
     schema,
     cors: true,
@@ -21,20 +23,22 @@ const server = new ApolloServer({
     
 });
 
+
 server.applyMiddleware({
     app,
     path: '/graphql',
     cors: true,
     onHealthCheck: () =>
         // eslint-disable-next-line no-undef
+
         new Promise((resolve, reject) => {
-            if (mongoose.connection.readyState > 0)
+            if (mongoose.connectionDefault.readyState > 0)
                 return resolve();
             else
                 return reject();
         }),
-        
 });
+
 
 app.listen({ port: process.env.PORT }, () => {
     console.log(`Server listening on port ${process.env.PORT}`);

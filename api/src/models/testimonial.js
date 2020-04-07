@@ -1,6 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
 import timestamps from 'mongoose-timestamp';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
+import { connection } from '../utils/db';
 
 
 export const TestimonialSchema = new Schema(
@@ -29,7 +30,7 @@ export const TestimonialSchema = new Schema(
             type: Array,
             trim: true,
             required: true,
-                photo: [{"name": "value"}],
+                photo: [],
                 video: [],
                 audio: [],
         }
@@ -47,5 +48,5 @@ TestimonialSchema.index({ createdAt: 1, updatedAt: 1 });
 
 
 
-export const Testimonial = mongoose.model('Testimonial', TestimonialSchema);
+export const Testimonial = connection.model('Testimonial', TestimonialSchema);
 export const TestimonialTC = composeWithMongoose(Testimonial);

@@ -5,7 +5,7 @@ dotenv.config();
 
 mongoose.Promise = global.Promise;
 
-const connection = mongoose.connect(process.env.MONGODB_URI, {
+const options = {
     autoIndex: true,
     reconnectTries: Number.MAX_VALUE,
     reconnectInterval: 500,
@@ -13,14 +13,25 @@ const connection = mongoose.connect(process.env.MONGODB_URI, {
     bufferMaxEntries: 0,
     keepAlive: 120,
     useNewUrlParser: true,
+}
+
+export const connection = mongoose.createConnection(process.env.MONGODB_URI, options);
+/**
+
+connection.on('connected', () => {
+    console.log('connected to mongodb');
 });
+connection.on('disconnected', () => {
+    console.log('connection disconnected');
+}); 
+
+*/
+
+export const connectionLocation = mongoose.createConnection(process.env.MONGODB_URI_LOCATION, options);
+    
 
 mongoose.set('useCreateIndex', true);
 
-connection
-    .then(db => db)
-    .catch(err => {
-        console.log(err);
-    });
 
-export default connection;
+
+

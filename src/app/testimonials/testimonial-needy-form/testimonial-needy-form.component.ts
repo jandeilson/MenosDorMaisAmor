@@ -11,7 +11,6 @@ import { User } from './graphql/types';
 export class TestimonialNeedyFormComponent implements OnInit {
 
   loading: boolean = true;
-  userId: any;
 
   formStep: boolean = false;
   formStepText = 'Prosseguir';
@@ -91,20 +90,20 @@ export class TestimonialNeedyFormComponent implements OnInit {
         phone: formValue.user.phone
       }
     }).subscribe((response) => {
-      this.userId = response.data;
+      const userId = response.data;
       this.loading = response.data.loading;
-      callMutationTestimonial();
+      callMutationTestimonial(userId);
     }, (error) => {
       console.error(error);
     });
 
-    const callMutationTestimonial = () => {
+    const callMutationTestimonial = (userId: any) => {
 
       this.apollo
       .mutate<CreateMutationResponse>({
         mutation: mutationTestimonial,
         variables: {
-          user: this.userId.userCreateOne.record._id,
+          user: userId.userCreateOne.record._id,
           text: formValue.testimonial.textTestimonial,
           state: formValue.testimonial.state,
           city: formValue.testimonial.city,
