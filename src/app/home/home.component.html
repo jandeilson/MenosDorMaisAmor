@@ -33,12 +33,23 @@
     </div>
 
     <div class="testimonials">
+        <h6 class="text-center">Filtrar por:</h6>
+        <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">Data</li>
+            <li class="list-group-item">Mais vistos</li>
+            <li class="list-group-item"><a href="#" (click)="filterByStates()">Estado</a></li>
+        </ul>
+
         <div class="container default">
-            <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
-    
-            <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
-        
-            <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
+          <div *ngFor="let user of users; let i=index" class="needy-testimonial" [ngClass]="{'mClickEffect': mClick == i}" (click)="mClickEvent(i)">
+              <div class="info">
+                <h5>{{ user.firstName }} {{ user.lastName }}</h5>
+                <h6>{{ user.testimonial[0].city }}, {{ user.testimonial[0].state }}</h6>
+              </div>
+              <div class="text">
+                <p>{{ user.testimonial[0].text | summary}}</p>
+              </div>
+          </div> 
         </div>
     </div>
 </section>

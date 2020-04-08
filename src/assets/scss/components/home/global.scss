@@ -23,5 +23,65 @@
         margin: 0 0 -15px 0;
         padding-bottom: 3rem;
     }
+
+    .needy-testimonial {
+
+        // variables
+        $transition: all 0.2s linear;
+
+        padding: 25px 20px;
+        border-radius: 7px;
+        height: 200px;
+        background-color: $white;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.13);
+        margin-top: -10px;
+        -webkit-transition: $transition;
+        -moz-transition: $transition;
+        -o-transition: $transition;
+        transition: $transition;
+        overflow: hidden;
+        cursor: pointer;
+
+
+        &:hover {
+            transform: scale(1.02);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.29);
+            -webkit-transition: $transition;
+            -moz-transition: $transition;
+            -o-transition: $transition;
+            transition: $transition;
+        }
+
+
+        .info {
+            height: 60px;
+
+            h5 {
+                font-size: 1.1rem;
+                font-weight: bold;
+            }
+            h6 {
+                color: #545454;
+                font-style: italic;
+            }
+        }
+        .text {
+            p{
+                font-size: 0.9rem;
+            }
+
+        }
+
+        
+        // mobile
+        &.mClickEffect {
+            transform: scale(1.02);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.29);
+            -webkit-transition: $transition;
+            -moz-transition: $transition;
+            -o-transition: $transition;
+            transition: $transition;
+        }
+    }
 }
 

@@ -1,13 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from "apollo-angular";
-import gql from "graphql-tag";
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { queryUsersAndTestimonails } from '../graphql/home'
+import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { StatesModalComponent } from './modals/states-modal/states-modal.component';
+
 
 @Component({
   selector: 'home',
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
+
+  filterByStates() {
+    const modalRef = this.modalService.open(StatesModalComponent);
+    modalRef.componentInstance.title = 'State Filter';
+  }
 
   customOptions: OwlOptions = {
     loop: false,
@@ -21,37 +29,25 @@ export class HomeComponent implements OnInit {
     responsive: {
       0:{ items: 2 },
       600:{ items:3 },
-      1000:{ items:5 }
+      1000:{ items:6 }
     },
   }
 
   public users: any[];
-  
+ 
   loading: boolean = true;
   testimonialsCarousel: any;
+  mClick: number;
 
-  constructor(private apollo: Apollo) { }
+  mClickEvent(i) {
+    this.mClick = i;
+  }
+  constructor(private apollo: Apollo, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.apollo
       .query<any>({
-        query: gql`
-        {
-          userMany {
-            _id
-            firstName
-            lastName
-            email
-            phone
-          }
-          testimonialMany {
-            user
-            text
-            state
-            city
-          }
-        }
-        `
+        query: queryUsersAndTestimonails
       })
       .subscribe(
         ({ data, loading }) => {

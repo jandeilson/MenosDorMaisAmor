@@ -5,17 +5,32 @@ import { SummaryPipe } from './../pipes/summary.pipe';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ModalComponent } from './../shared/modal-component/modal.component';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { StatesFilterComponent } from './filters/states-filter/states-filter.component';
+import { StatesModalComponent } from './modals/states-modal/states-modal.component';
+
 
 @NgModule({
   declarations: [
     HomeComponent,
-    SummaryPipe
+    ModalComponent,
+    SummaryPipe,
+    StatesFilterComponent,
+    StatesModalComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     BrowserAnimationsModule,
-    CarouselModule
+    CarouselModule,
+    NgbModule
+  ],
+  providers: [
+    NgbActiveModal
+  ],
+  entryComponents: [
+    StatesFilterComponent
   ]
 })
 export class HomeModule { }
