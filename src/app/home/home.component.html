@@ -7,13 +7,15 @@
                         <div class="carousel-block">
                             <div class="content">
                                 <div class="user-testimonial">
-                                    <p>
-                                        {{ user.testimonial[0].text | summary}}
+                                    <p *ngIf="user.testimonial !== undefined; else elseBlock">
+                                        {{ user.testimonial.text | summary}}
                                     </p>
+                                    <ng-template #elseBlock>Tem algo errado...</ng-template>
                                 </div>
                                 <div class="user-info">
                                     <h5 class="font-weight-bold">{{ user.firstName }} {{ user.lastName }}</h5>
-                                    <h6>{{ user.testimonial[0].city }}, {{ user.testimonial[0].state }}</h6>
+                                    <h6 *ngIf="user.testimonial !== undefined; else elseBlock">{{ user.testimonial.city }}, {{ user.testimonial.state }}</h6>
+                                    <ng-template #elseBlock>Tem algo errado...</ng-template>
                                 </div>
                             </div>
                         </div>
@@ -41,15 +43,19 @@
         </ul>
 
         <div class="container default">
-          <div *ngFor="let user of users; let i=index" class="needy-testimonial" [ngClass]="{'mClickEffect': mClick == i}" (click)="mClickEvent(i)">
-              <div class="info">
-                <h5>{{ user.firstName }} {{ user.lastName }}</h5>
-                <h6>{{ user.testimonial[0].city }}, {{ user.testimonial[0].state }}</h6>
-              </div>
-              <div class="text">
-                <p>{{ user.testimonial[0].text | summary}}</p>
-              </div>
-          </div> 
+            <div *ngFor="let user of users; let i=index" class="needy-testimonial" [ngClass]="{'mClickEffect': mClick == i}" (click)="mClickEvent(i)">
+                <div>
+                    <div class="info">
+                        <h5>{{ user.firstName }} {{ user.lastName }}</h5>
+                        <h6 *ngIf="user.testimonial !== undefined; else elseLocation">{{ user.testimonial.city }}, {{ user.testimonial.state }}</h6>
+                        <ng-template #elseLocation><h6>Localização não encontrada.</h6></ng-template>
+                      </div>
+                      <div class="text">
+                        <p *ngIf="user.testimonial !== undefined; else elseTestimonial">{{ user.testimonial.text | summary}}</p>
+                        <ng-template #elseTestimonial><p>Depoimento não encontrado.</p></ng-template>
+                      </div>
+                </div>
+            </div> 
         </div>
     </div>
 </section>

@@ -169,7 +169,6 @@ export class TestimonialNeedyFormComponent implements OnInit {
         ({ data, loading }) => {
           this.states = data.stateMany;
           this.loading = loading;
-          console.log(this.stateId)
         }
       );
 

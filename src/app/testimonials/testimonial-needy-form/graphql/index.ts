@@ -17,7 +17,6 @@ mutation($firstName: String!, $lastName: String!, $email: String!, $phone: Float
       lastName
       email
       phone
-      testimonial
     }
   }
 }

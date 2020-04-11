@@ -26,11 +26,7 @@ export const UserSchema = new Schema({
         type: Number,
         trim: true,
         required: true,
-    },
-    testimonial: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Testimonial'
-      }],
+    }
 },
 { 
     collection: 'users' 

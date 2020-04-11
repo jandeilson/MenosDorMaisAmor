@@ -17,3 +17,13 @@ query {
     }
   }
 `;
+
+export const queryStates = gql`
+query {
+  stateMany {
+    _id
+    initials
+    name
+  }
+}
+`;

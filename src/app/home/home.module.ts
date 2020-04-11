@@ -9,6 +9,7 @@ import { ModalComponent } from './../shared/modal-component/modal.component';
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { StatesFilterComponent } from './filters/states-filter/states-filter.component';
 import { StatesModalComponent } from './modals/states-modal/states-modal.component';
+import { FiltersComponent } from './filters/filters.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { StatesModalComponent } from './modals/states-modal/states-modal.compone
     ModalComponent,
     SummaryPipe,
     StatesFilterComponent,
-    StatesModalComponent
+    StatesModalComponent,
+    FiltersComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { StatesModalComponent } from './modals/states-modal/states-modal.compone
     NgbModule
   ],
   providers: [
-    NgbActiveModal
+    NgbActiveModal,
+    FiltersComponent
   ],
   entryComponents: [
     StatesFilterComponent
