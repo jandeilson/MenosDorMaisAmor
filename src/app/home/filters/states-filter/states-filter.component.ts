@@ -3,7 +3,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'states-filter',
-  templateUrl: './states-filter.component.html'
+  templateUrl: './states-filter.component.html',
+  styleUrls: ['../../../../assets/scss/components/home/modal.scss']
 })
 export class StatesFilterComponent implements OnInit {
 

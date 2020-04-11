@@ -1,0 +1,17 @@
+.btn {
+    &.btn-outline-modal {
+        color: #000;
+        border-color: #000;
+        margin: 4px;
+        font-size: 0.8rem;
+
+        &:focus, &.focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.5);
+        }
+        
+        &:hover {
+            background: #000;
+            color: #fff;
+        }
+    }    
+}

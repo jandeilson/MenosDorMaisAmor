@@ -7,15 +7,13 @@
                         <div class="carousel-block">
                             <div class="content">
                                 <div class="user-testimonial">
-                                    <p *ngIf="user.testimonial !== undefined; else elseBlock">
-                                        {{ user.testimonial.text | summary}}
+                                    <p>
+                                        {{ user.testimonial.text | summary }}
                                     </p>
-                                    <ng-template #elseBlock>Tem algo errado...</ng-template>
                                 </div>
                                 <div class="user-info">
                                     <h5 class="font-weight-bold">{{ user.firstName }} {{ user.lastName }}</h5>
-                                    <h6 *ngIf="user.testimonial !== undefined; else elseBlock">{{ user.testimonial.city }}, {{ user.testimonial.state }}</h6>
-                                    <ng-template #elseBlock>Tem algo errado...</ng-template>
+                                    <h6>{{ user.testimonial.city }}, {{ user.testimonial.state }}</h6>
                                 </div>
                             </div>
                         </div>
@@ -29,33 +27,36 @@
         <div class="container default">
             <div class="help-needy text-center">
                 <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
-                <button routerLink="/help" class="btn btn-light">Preciso de ajuda!</button>
+                <button routerLink="/help" class="btn btn-light">Eu tenho uma dor!</button>
             </div>
         </div>
     </div>
 
-    <div class="testimonials">
-        <h6 class="text-center">Filtrar por:</h6>
-        <ul class="list-group list-group-horizontal">
-            <li class="list-group-item">Data</li>
-            <li class="list-group-item">Mais vistos</li>
-            <li class="list-group-item"><a href="#" (click)="filterByStates()">Estado</a></li>
-        </ul>
-
+    <div class="testimonials" #testimonials>
         <div class="container default">
-            <div *ngFor="let user of users; let i=index" class="needy-testimonial" [ngClass]="{'mClickEffect': mClick == i}" (click)="mClickEvent(i)">
-                <div>
-                    <div class="info">
-                        <h5>{{ user.firstName }} {{ user.lastName }}</h5>
-                        <h6 *ngIf="user.testimonial !== undefined; else elseLocation">{{ user.testimonial.city }}, {{ user.testimonial.state }}</h6>
-                        <ng-template #elseLocation><h6>Localização não encontrada.</h6></ng-template>
-                      </div>
-                      <div class="text">
-                        <p *ngIf="user.testimonial !== undefined; else elseTestimonial">{{ user.testimonial.text | summary}}</p>
-                        <ng-template #elseTestimonial><p>Depoimento não encontrado.</p></ng-template>
-                      </div>
-                </div>
-            </div> 
+            <div class="filterByText">Filtrar por:</div>
+            <ul class="list-filter list-group list-group-horizontal" >
+                <li class="list-group-item" [ngClass]="{'active': filterActive === 'Data' }" (click)="filterByStates($event, testimonials)">Data</li>
+                <li class="list-group-item" [ngClass]="{'active': filterActive === 'Mais vistos' }" (click)="filterByStates($event, testimonials)">Mais vistos</li>
+                <li class="list-group-item" [ngClass]="{'active': filterActive === 'Estado' }" (click)="filterByStates($event, testimonials)">Estado</li>
+            </ul>
+
+            <div >
+                <div *ngFor="let user of users; let i=index" class="needy-testimonial" [ngClass]="{'active': testimonialEvent === i }" (click)="goToTestimonial(i)">
+                    <div>
+                        <div class="info">
+                            <h5>{{ user.firstName }} {{ user.lastName }}</h5><small>compartilhou:</small>
+                            
+                        </div>
+                        <div class="text">
+                            <p>{{ user.testimonial.text }}</p>
+                            <h6>{{ user.testimonial.city }}, {{ user.testimonial.state }}</h6>
+                            <button class="btn">Quero diminuir essa dor!</button>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            
         </div>
     </div>
 </section>

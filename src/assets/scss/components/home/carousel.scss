@@ -8,6 +8,37 @@
     width: 550px;
     display: block;
 
+    .owl-theme {
+        .owl-dots {
+            margin-top: 40px;
+            .owl-dot {
+                
+                &.active{
+                    span {
+                        background: $default-green;
+                        box-shadow: 0px 0px 8px rgba(71, 220, 86, 1);
+                    }
+                }
+                
+                span {
+                    width: 35px;
+                    height: 3px;
+                    margin: 0;
+                    border-radius: 0; 
+                    background: $default-green;
+                    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.13);
+
+                    
+                    &:hover {
+                        background: $default-green;
+                    }
+                }
+            }
+        }
+    }
+
+
+
     .carousel-block {
         height: 320px;
         border-radius: 7px;

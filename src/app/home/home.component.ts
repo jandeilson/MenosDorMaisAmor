@@ -17,13 +17,15 @@ export class HomeComponent implements OnInit {
   queryData: any[];
   loading: boolean = true;
   testimonialsCarousel: any;
-  mClick: number;
+  testimonialEvent: any;
+  filterActive: any;
 
   constructor(private apollo: Apollo, private modalService: NgbModal, private FiltersComponent: FiltersComponent) {}
 
-  filterByStates() {
+  filterByStates(event, testimonials) {
+    this.filterActive = event.target.textContent;
     this.FiltersComponent.getStates();
-    const modalRef = this.modalService.open(StatesModalComponent);
+    const modalRef = this.modalService.open(StatesModalComponent, { centered: true });
     modalRef.componentInstance.data = this.FiltersComponent;
 
     modalRef.result.then((stateName) => {
@@ -31,8 +33,11 @@ export class HomeComponent implements OnInit {
         if (result.testimonial.state === stateName) 
           return result;
       });
+      
 
       this.users = result;
+      testimonials.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
+      
     });
   }
 
@@ -44,7 +49,7 @@ export class HomeComponent implements OnInit {
     touchDrag: true,
     margin: 30,
     pullDrag: true,
-    dots: false,
+    dots: true,
     nav: false,
     responsive: {
       0:{ items: 2 },
@@ -53,8 +58,8 @@ export class HomeComponent implements OnInit {
     },
   }
 
-  mClickEvent(i) {
-    this.mClick = i;
+  goToTestimonial(i: number) {
+    this.testimonialEvent = i;
   }
 
   ngOnInit(): void {
