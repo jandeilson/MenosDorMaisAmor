@@ -1,0 +1,21 @@
+#needy-detail {
+    
+    h5 {
+        font-size: 1.2rem;
+        font-weight: bold;
+        display: inline-block;
+        margin: 0 10px 0 0;
+    }
+
+    h6 {
+        color: $default-grey;
+        font-style: italic;
+        font-size: 1rem;
+    }
+
+    p {
+        margin: 25px 0;
+        color: $default-grey;
+    }
+
+}

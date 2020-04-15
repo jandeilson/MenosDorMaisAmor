@@ -2,9 +2,9 @@
     <div class="carousel">
         <div class="container default">
             <owl-carousel-o [options]="customOptions" class="testimonials-carousel">
-                <ng-container *ngFor="let user of users">
+                <ng-container *ngFor="let user of users" >
                     <ng-template carouselSlide [id]="user.id">
-                        <div class="carousel-block">
+                        <div class="carousel-block" [routerLink]="['/testimonial', user.testimonial._id]">
                             <div class="content">
                                 <div class="user-testimonial">
                                     <p>
@@ -42,7 +42,11 @@
             </ul>
 
             <div >
-                <div *ngFor="let user of users; let i=index" class="needy-testimonial" [ngClass]="{'active': testimonialEvent === i }" (click)="goToTestimonial(i)">
+                <div 
+                    *ngFor="let user of users; let i=index" 
+                    [ngClass]="{'active': testimonialEvent === i }" 
+                    (click)="goToTestimonial(i)"
+                    class="needy-testimonial" >
                     <div>
                         <div class="info">
                             <h5>{{ user.firstName }} {{ user.lastName }}</h5><small>compartilhou:</small>
@@ -51,7 +55,9 @@
                         <div class="text">
                             <p>{{ user.testimonial.text }}</p>
                             <h6>{{ user.testimonial.city }}, {{ user.testimonial.state }}</h6>
-                            <button class="btn">Quero diminuir essa dor!</button>
+                            <div class="text-center pb-3 py-3">
+                                <button [routerLink]="['/testimonial', user.testimonial._id]" class="btn btn-default style1">Como diminuir essa dor?</button>
+                            </div>
                         </div>
                     </div>
                 </div> 

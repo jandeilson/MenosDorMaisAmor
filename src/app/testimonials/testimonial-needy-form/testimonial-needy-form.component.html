@@ -1,6 +1,6 @@
 <section id="needy-form">
     <div class="container default">
-        <div class="form-block">
+        <div class="blank-block">
             <form [formGroup]="form" #f="ngForm" (ngSubmit)="submit(f)" class="form">
             
                 <div formGroupName="testimonial">
@@ -99,7 +99,7 @@
     
             </form>
 
-            <button class="btn btn-primary" (click)="formSteps()">{{ formStepText }}</button>
+            <button class="btn btn-default" (click)="formSteps()">{{ formStepText }}</button>
         <p> {{ f.value | json }} </p>
         </div>
         

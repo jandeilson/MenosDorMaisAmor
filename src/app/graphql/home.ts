@@ -10,6 +10,7 @@ query {
       phone
     }
     testimonialMany {
+      _id
       user
       text
       state

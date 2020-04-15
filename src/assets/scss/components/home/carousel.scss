@@ -58,6 +58,7 @@
                 height: 220px;
                 p {
                     font-size: 0.92rem;
+                    color: $default-grey
                 }
             }
             .user-info {
@@ -66,7 +67,7 @@
                     font-size: 1.1rem;
                 }
                 h6 {
-                    color: #9C9C9C;
+                    color: $default-grey;
                 }
             }
         }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Apollo } from "apollo-angular";
+import { testimonialQuery, userQuery } from '../../graphql/detail-testimonial';
 
 @Component({
   selector: 'testimonial-detail',
@@ -6,9 +9,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestimonialDetailComponent implements OnInit {
 
-  constructor() { }
+  id: number;
+  private sub: any;
+  loading: boolean = true;
+
+  testimonial: any;
+
+  constructor(private apollo: Apollo, private route: ActivatedRoute) {}
+
+
+  getTestimonialUser(testimonial) {
+    this.apollo
+    .query<any>({
+      query: userQuery,
+      variables: {
+        userId: testimonial.user,
+      }
+    })
+    .subscribe(
+      ({ data, loading }) => {
+        const user = data.userById;
+        Object.assign(user, testimonial);
+        this.testimonial = user;
+        this.loading = loading;
+      }
+    );
+  }
+
 
   ngOnInit(): void {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+
+    this.apollo
+      .query<any>({
+        query: testimonialQuery,
+        variables: {
+          testimonialId: this.id,
+        }
+      })
+      .subscribe(
+        ({ data, loading }) => {
+          this.testimonial = data.testimonialById;
+          this.getTestimonialUser(this.testimonial);
+          this.loading = loading;
+        }
+      );
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 
 }

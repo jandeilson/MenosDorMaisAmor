@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+
 
 import { TestimonialsComponent } from './testimonials.component';
 import { TestimonialDetailComponent } from './testimonial-detail/testimonial-detail.component';
@@ -17,7 +19,8 @@ import { TestimonialNeedyFormComponent } from './testimonial-needy-form/testimon
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ]
 })
-export class TestimonialsModule { }
+export class TestimonialsModule {}
