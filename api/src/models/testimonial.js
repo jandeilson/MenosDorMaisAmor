@@ -26,6 +26,10 @@ export const TestimonialSchema = new Schema(
             trim: true,
             required: false,
         },
+        interests: {
+            type: Number,
+            trim: true
+        },
         media: {
             type: Array,
             trim: true,

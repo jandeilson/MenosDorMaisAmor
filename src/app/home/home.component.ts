@@ -41,6 +41,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  filterByInterests(event) {
+    this.filterActive = event.target.textContent;
+    this.users.sort((a, b) => {
+      return b.testimonial.interests - a.testimonial.interests;
+    });
+  }
+
   // Owl Carousel options
   customOptions: OwlOptions = {
     loop: false,
@@ -99,7 +106,6 @@ export class HomeComponent implements OnInit {
           this.users = usersFiltered;
         
           this.loading = loading;
-
         }
       );
   }

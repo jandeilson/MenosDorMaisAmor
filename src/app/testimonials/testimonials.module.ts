@@ -8,6 +8,9 @@ import { TestimonialsComponent } from './testimonials.component';
 import { TestimonialDetailComponent } from './testimonial-detail/testimonial-detail.component';
 import { TestimonialNeedyFormComponent } from './testimonial-needy-form/testimonial-needy-form.component';
 
+import { BrazilianStatesGQL } from '../graphql/states'
+
+
 
 
 @NgModule({
@@ -21,6 +24,9 @@ import { TestimonialNeedyFormComponent } from './testimonial-needy-form/testimon
     ReactiveFormsModule,
     FormsModule,
     RouterModule
+  ],
+  providers: [
+    BrazilianStatesGQL
   ]
 })
 export class TestimonialsModule {}

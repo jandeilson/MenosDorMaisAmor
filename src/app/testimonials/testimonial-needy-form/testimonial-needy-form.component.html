@@ -5,7 +5,7 @@
             
                 <div formGroupName="testimonial">
                     <div class="step" [ngClass]="formStep ? '' : 'currentStep'">
-                        <h3>Conte sua história!</h3>
+                        <h4>Conte um pouco da sua história</h4>
                         <div class="form-group">
                             <label for="textTestimonial"></label>
                             <textarea 
@@ -16,6 +16,8 @@
                                 <div *ngIf="fieldValidation.testimonial.errors.required">Precisamos do seu depoimento.</div>
                             </div>
                         </div>
+
+                        <h4>Fotos podem ajudar a contar sua história</h4>
                         <div class="form-group">
                             <label for="mediaPhotos"></label>
                             <input 
@@ -27,7 +29,7 @@
     
                 <div class="step" [ngClass]="formStep ? 'currentStep' : ''">
                     <div formGroupName="user">
-                        <h3>Para que possam te ajudar, precisamos das seguintes informações:</h3>
+                        <h4>Para que possam te ajudar, precisamos das seguintes informações:</h4>
                         <div class="form-group">
                             <label for="firstName"></label>
                             <input 
@@ -77,12 +79,15 @@
                                 formControlName="state" name="state"
                                 class="form-control" id="state" placeholder="Estado" (change)="citiesState($event)">
                                 <option value="" disabled selected>Estado</option>
-                                <option *ngFor="let state of states" [value]="state.name" [attr.state-id]="state._id">{{ state.name }}</option>
+                                <option *ngFor="let state of states | async" [value]="state.name" [attr.state-id]="state._id">{{ state.name }}</option>
                             </select>
-
-                            <option *ngIf="loading" selected>Carregando cidades...</option>
                         </div>
-                        <div *ngIf="cities" class="form-group">
+
+                        <div *ngIf="loading" class="loading">
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span>Carregando cidades...</span>
+                        </div>
+
+                        <div *ngIf="cities && !loading" class="form-group">
                             <label for="city"></label>
                             <select 
                                 formControlName="city" name="city"
@@ -92,15 +97,13 @@
                             </select>
                         </div> 
                     </div>
-    
-                    
-                    <button class="btn btn-primary">Enviar</button>
+
+                    <button class="btn btn-default" [disabled]="f.valid">Enviar</button>
                 </div>
     
             </form>
 
             <button class="btn btn-default" (click)="formSteps()">{{ formStepText }}</button>
-        <p> {{ f.value | json }} </p>
         </div>
         
     </div>

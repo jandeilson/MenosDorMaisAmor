@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms'
 import { Apollo } from 'apollo-angular';
 import { mutationUser, mutationTestimonial, queryStates, queryCities, CreateMutationResponse} from './graphql';
-
-
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { BrazilianStatesGQL, States } from '../../graphql/states'
+import { BrazilianCitiesGQL, Cities } from '../../graphql/cities'
 
 @Component({
   selector: 'testimonial-needy-form',
@@ -11,52 +13,40 @@ import { mutationUser, mutationTestimonial, queryStates, queryCities, CreateMuta
 })
 export class TestimonialNeedyFormComponent implements OnInit {
 
-  loading: boolean = true;
-
+  loading: boolean = false;
   formStep: boolean = false;
-  formStepText = 'Prosseguir';
+  formStepText = 'Prosseguir ⮞';
+  states: Observable<States[]>;
+  cities: Cities[];
+  stateId: string;
 
-  public states: any[];
-  public cities: any[];
-  public stateId: string;
-
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo, private brazilianStates: BrazilianStatesGQL, private brazilianCitiesGQL: BrazilianCitiesGQL) { }
   
 
   formSteps() {
     this.formStep = !this.formStep;
+    !this.formStep ? this.formStepText = 'Prosseguir ⮞' : this.formStepText = '⮜ Anterior';
 
-    !this.formStep ? this.formStepText = 'Prosseguir' : this.formStepText = 'Anterior';
+    this.states = this.brazilianStates.watch()
+    .valueChanges
+    .pipe(map((result) => result.data && result.data.stateMany));
   }
 
-  citiesState(event) {
+  citiesState(event: any) {
+    this.loading = !this.loading;
     const elSelected = event.target;
     const value = elSelected.options[elSelected.selectedIndex].getAttribute('state-id');
     const stateId = value;
 
-    this.loading = !this.loading;
-
-    // Get "cities" from database based in "state id" when state field selected
-    const getCities = (id: string) => {
-      this.apollo
-      .query<any>({
-        query: queryCities,
-        variables: {
-          stateId: id,
-        }
-      })
-      .subscribe(
-        ({ data, loading }) => {
-          setTimeout(() => {
-            this.cities = data.cityMany;
-            this.loading = loading;
-          }, 2000);
-        }
-      );
-    }
-
-    getCities(stateId);
-
+    // Get cities our database
+    this.brazilianCitiesGQL.watch({
+      stateId: stateId,
+    })
+    .valueChanges
+    .subscribe(({ data, loading }) => {
+      this.loading = loading;
+      this.cities = data.cityMany;
+    });
   }
 
   // Form groups
@@ -115,6 +105,8 @@ export class TestimonialNeedyFormComponent implements OnInit {
 
   // actions input submit 
   submit(f) {
+
+    // TODO otimize all mutations on this function
     const formValue = f.form.value;
     
     this.apollo
@@ -157,21 +149,7 @@ export class TestimonialNeedyFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    // Start a query with all states
-    // TODO maybe call this only when user click next step
-
-    this.apollo
-      .query<any>({
-        query: queryStates
-      })
-      .subscribe(
-        ({ data, loading }) => {
-          this.states = data.stateMany;
-          this.loading = loading;
-        }
-      );
-
+    
   }
 
 }

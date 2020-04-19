@@ -37,7 +37,7 @@
             <div class="filterByText">Filtrar por:</div>
             <ul class="list-filter list-group list-group-horizontal" >
                 <li class="list-group-item" [ngClass]="{'active': filterActive === 'Data' }" (click)="filterByStates($event, testimonials)">Data</li>
-                <li class="list-group-item" [ngClass]="{'active': filterActive === 'Mais vistos' }" (click)="filterByStates($event, testimonials)">Mais vistos</li>
+                <li class="list-group-item" [ngClass]="{'active': filterActive === 'Mais vistos' }" (click)="filterByInterests($event)">Mais vistos</li>
                 <li class="list-group-item" [ngClass]="{'active': filterActive === 'Estado' }" (click)="filterByStates($event, testimonials)">Estado</li>
             </ul>
 
@@ -56,7 +56,7 @@
                             <p>{{ user.testimonial.text }}</p>
                             <h6>{{ user.testimonial.city }}, {{ user.testimonial.state }}</h6>
                             <div class="text-center pb-3 py-3">
-                                <button [routerLink]="['/testimonial', user.testimonial._id]" class="btn btn-default style1">Como diminuir essa dor?</button>
+                                <interested-button [testimonialId]="user.testimonial._id" [count]="user.testimonial.interests"></interested-button>
                             </div>
                         </div>
                     </div>

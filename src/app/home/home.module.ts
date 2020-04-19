@@ -11,6 +11,8 @@ import { StatesFilterComponent } from './filters/states-filter/states-filter.com
 import { StatesModalComponent } from './modals/states-modal/states-modal.component';
 import { FiltersComponent } from './filters/filters.component';
 
+import { InterestsGQL } from '../graphql/interests'
+import { InterestedButtonComponent } from '../shared/interestedButton/interested-button.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { FiltersComponent } from './filters/filters.component';
     SummaryPipe,
     StatesFilterComponent,
     StatesModalComponent,
-    FiltersComponent
+    FiltersComponent,
+    InterestedButtonComponent
   ],
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import { FiltersComponent } from './filters/filters.component';
   ],
   providers: [
     NgbActiveModal,
-    FiltersComponent
+    FiltersComponent,
+    InterestsGQL
   ],
   entryComponents: [
     StatesFilterComponent
