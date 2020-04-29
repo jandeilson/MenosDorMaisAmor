@@ -1,110 +1,105 @@
-<section id="needy-form">
-    <div class="container default">
-        <div class="blank-block">
-            <form [formGroup]="form" #f="ngForm" (ngSubmit)="submit(f)" class="form">
-            
-                <div formGroupName="testimonial">
-                    <div class="step" [ngClass]="formStep ? '' : 'currentStep'">
-                        <h4>Conte um pouco da sua história</h4>
-                        <div class="form-group">
-                            <label for="textTestimonial"></label>
-                            <textarea 
-                                formControlName="textTestimonial" name="textTestimonial" 
-                                id="textTestimonial" cols="30" rows="10" placeholder="Escreve sua história" class="form-control"></textarea>
-                            
-                            <div *ngIf="fieldValidation.testimonial.touched && fieldValidation.testimonial.invalid" class="alert alert-danger">
-                                <div *ngIf="fieldValidation.testimonial.errors.required">Precisamos do seu depoimento.</div>
-                            </div>
-                        </div>
-
-                        <h4>Fotos podem ajudar a contar sua história</h4>
-                        <div class="form-group">
-                            <label for="mediaPhotos"></label>
-                            <input 
-                                formArrayName="mediaPhotos" name="mediaPhotos" 
-                                type="file" id="mediaPhotos" (change)="detectFiles($event)" accept="image/*" multiple>
-                        </div>     
+<div class="needy-form">
+    <form [formGroup]="form" #f="ngForm" (ngSubmit)="submit(f)" class="form">
+    
+        <div formGroupName="testimonial">
+            <div class="step" [ngClass]="formStep ? '' : 'currentStep'">
+                <h4>Conte um pouco da sua história</h4>
+                <div class="form-group">
+                    <label for="textTestimonial"></label>
+                    <textarea 
+                        formControlName="textTestimonial" name="textTestimonial" 
+                        id="textTestimonial" cols="30" rows="10" placeholder="Escreve sua história" class="form-control"></textarea>
+                    
+                    <div *ngIf="fieldValidation.testimonial.touched && fieldValidation.testimonial.invalid" class="alert alert-danger">
+                        <div *ngIf="fieldValidation.testimonial.errors.required">Precisamos do seu depoimento.</div>
                     </div>
                 </div>
-    
-                <div class="step" [ngClass]="formStep ? 'currentStep' : ''">
-                    <div formGroupName="user">
-                        <h4>Para que possam te ajudar, precisamos das seguintes informações:</h4>
-                        <div class="form-group">
-                            <label for="firstName"></label>
-                            <input 
-                                formControlName="firstName" name="firstName" 
-                                id="firstName" type="text" placeholder="Nome" class="form-control">
-                        
-                            <div *ngIf="fieldValidation.firstName.touched && fieldValidation.firstName.invalid" class="alert alert-danger">
-                                <div *ngIf="fieldValidation.firstName.errors.required">Precisamos do seu primeiro nome.</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName"></label>
-                            <input 
-                                formControlName="lastName" name="lastName"
-                                id ="lastName" type="text" placeholder="Sobrenome" class="form-control">
-    
-                            <div *ngIf="fieldValidation.lastName.touched && fieldValidation.lastName.invalid" class="alert alert-danger">
-                                <div *ngIf="fieldValidation.lastName.errors.required">Precisamos do seu segundo nome.</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="Email"></label>
-                            <input 
-                                formControlName="email" name="email"
-                                id ="email" type="email" placeholder="E-mail" class="form-control">
-    
-                            <div *ngIf="fieldValidation.email.touched && fieldValidation.email.invalid" class="alert alert-danger">
-                                <div *ngIf="fieldValidation.email.errors.required">Precisamos do seu e-mail.</div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone"></label>
-                            <input 
-                                formControlName="phone" name="phone"
-                                id="phone" type="number" placeholder="Telefone" class="form-control">
-                            
-                            <div *ngIf="fieldValidation.phone.touched && fieldValidation.phone.invalid" class="alert alert-danger">
-                                <div *ngIf="fieldValidation.phone.errors.required">Precisamos do seu telefone.</div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div formGroupName="testimonial">
-                        <div class="form-group">
-                            <label for="state"></label>
-                            <select 
-                                formControlName="state" name="state"
-                                class="form-control" id="state" placeholder="Estado" (change)="citiesState($event)">
-                                <option value="" disabled selected>Estado</option>
-                                <option *ngFor="let state of states | async" [value]="state.name" [attr.state-id]="state._id">{{ state.name }}</option>
-                            </select>
-                        </div>
 
-                        <div *ngIf="loading" class="loading">
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span>Carregando cidades...</span>
-                        </div>
-
-                        <div *ngIf="cities && !loading" class="form-group">
-                            <label for="city"></label>
-                            <select 
-                                formControlName="city" name="city"
-                                class="form-control" id="city" placeholder="Cidade">
-                                <option value="" disabled selected>Cidade</option>
-                                <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
-                            </select>
-                        </div> 
-                    </div>
-
-                    <button class="btn btn-default" [disabled]="f.valid">Enviar</button>
-                </div>
-    
-            </form>
-
-            <button class="btn btn-default" (click)="formSteps()">{{ formStepText }}</button>
+                <h4>Fotos podem ajudar a contar sua história</h4>
+                <div class="form-group">
+                    <label for="mediaPhotos"></label>
+                    <input 
+                        formArrayName="mediaPhotos" name="mediaPhotos" 
+                        type="file" id="mediaPhotos" (change)="detectFiles($event)" accept="image/*" multiple>
+                </div>     
+            </div>
         </div>
-        
-    </div>
-</section>
+
+        <div class="step" [ngClass]="formStep ? 'currentStep' : ''">
+            <div formGroupName="user">
+                <h4>Para que possam te ajudar, precisamos das seguintes informações:</h4>
+                <div class="form-group">
+                    <label for="firstName"></label>
+                    <input 
+                        formControlName="firstName" name="firstName" 
+                        id="firstName" type="text" placeholder="Nome" class="form-control">
+                
+                    <div *ngIf="fieldValidation.firstName.touched && fieldValidation.firstName.invalid" class="alert alert-danger">
+                        <div *ngIf="fieldValidation.firstName.errors.required">Precisamos do seu primeiro nome.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName"></label>
+                    <input 
+                        formControlName="lastName" name="lastName"
+                        id ="lastName" type="text" placeholder="Sobrenome" class="form-control">
+
+                    <div *ngIf="fieldValidation.lastName.touched && fieldValidation.lastName.invalid" class="alert alert-danger">
+                        <div *ngIf="fieldValidation.lastName.errors.required">Precisamos do seu segundo nome.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Email"></label>
+                    <input 
+                        formControlName="email" name="email"
+                        id ="email" type="email" placeholder="E-mail" class="form-control">
+
+                    <div *ngIf="fieldValidation.email.touched && fieldValidation.email.invalid" class="alert alert-danger">
+                        <div *ngIf="fieldValidation.email.errors.required">Precisamos do seu e-mail.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone"></label>
+                    <input 
+                        formControlName="phone" name="phone"
+                        id="phone" type="number" placeholder="Telefone" class="form-control">
+                    
+                    <div *ngIf="fieldValidation.phone.touched && fieldValidation.phone.invalid" class="alert alert-danger">
+                        <div *ngIf="fieldValidation.phone.errors.required">Precisamos do seu telefone.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div formGroupName="testimonial">
+                <div class="form-group">
+                    <label for="state"></label>
+                    <select 
+                        formControlName="state" name="state"
+                        class="form-control" id="state" placeholder="Estado" (change)="citiesState($event)">
+                        <option value="" disabled selected>Estado</option>
+                        <option *ngFor="let state of states | async" [value]="state.name" [attr.state-id]="state._id">{{ state.name }}</option>
+                    </select>
+                </div>
+
+                <div *ngIf="loading" class="loading">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span>Carregando cidades...</span>
+                </div>
+
+                <div *ngIf="cities && !loading" class="form-group">
+                    <label for="city"></label>
+                    <select 
+                        formControlName="city" name="city"
+                        class="form-control" id="city" placeholder="Cidade">
+                        <option value="" disabled selected>Cidade</option>
+                        <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
+                    </select>
+                </div> 
+            </div>
+
+            <button class="btn btn-default" [disabled]="f.valid">Enviar</button>
+        </div>
+
+    </form>
+
+    <button class="btn btn-default" (click)="formSteps()">{{ formStepText }}</button>
+</div>

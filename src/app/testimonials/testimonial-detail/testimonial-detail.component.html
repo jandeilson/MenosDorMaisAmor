@@ -1,21 +1,15 @@
-<section id="needy-detail">
-    <div class="container default">
-        <div class="blank-block">
-            <button routerLink="/" type="button" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+<div class="needy-detail">
+    <div *ngIf="loading">Carregando...</div>
+    <div *ngIf="!loading">
+    <h5>{{ testimonial.firstName }} {{ testimonial.lastName }}</h5>
+    <h6>{{ testimonial.city }}, {{ testimonial.state }}</h6>
 
-            <div *ngIf="loading">Carregando...</div>
-            <div *ngIf="!loading">
-                <h5>{{ testimonial.firstName }} {{ testimonial.lastName }}</h5>
-                <h6>{{ testimonial.city }}, {{ testimonial.state }}</h6>
+    <p>{{ testimonial.text }}</p>
 
-                <p>{{ testimonial.text }}</p>
+    <!-- Media here -->
 
-                <!-- Media here -->
-
-                <div class="text-center">
-                    <button class="btn btn-default">Quero diminuir essa dor!</button>
-                </div>
-            </div>
-        </div>
+    <div class="text-center">
+        <common-button [testimonialId]="testimonial._id"  title="Quero diminuir essa dor!"></common-button>
     </div>
-</section>
+    </div>
+</div>

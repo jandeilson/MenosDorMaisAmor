@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms'
 import { Apollo } from 'apollo-angular';
-import { mutationUser, mutationTestimonial, queryStates, queryCities, CreateMutationResponse} from './graphql';
+import { mutationUser, mutationTestimonial, CreateMutationResponse} from './graphql';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BrazilianStatesGQL, States } from '../../graphql/states'
@@ -38,7 +38,6 @@ export class TestimonialNeedyFormComponent implements OnInit {
     const value = elSelected.options[elSelected.selectedIndex].getAttribute('state-id');
     const stateId = value;
 
-    // Get cities our database
     this.brazilianCitiesGQL.watch({
       stateId: stateId,
     })
@@ -126,7 +125,6 @@ export class TestimonialNeedyFormComponent implements OnInit {
       console.error(error);
     });
 
-    // After submit "user mutation" and get "user id" call "testimonial mutation"
     const callMutationTestimonial = (userId: any) => {
 
       this.apollo

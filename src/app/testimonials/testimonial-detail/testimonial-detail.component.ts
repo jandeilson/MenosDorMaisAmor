@@ -17,7 +17,7 @@ export class TestimonialDetailComponent implements OnInit {
 
   constructor(private apollo: Apollo, private route: ActivatedRoute) {}
 
-
+  //TODO optimize this
   getTestimonialUser(testimonial) {
     this.apollo
     .query<any>({

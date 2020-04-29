@@ -1,4 +1,4 @@
-#needy-form {
+.needy-form {
 
 
     .loading {
@@ -26,16 +26,17 @@
         text-align: center;
         font-size: 1.15rem;
     }
-    .blank-block {
-        .form {
-            .step {
-                display: none;
-    
-                &.currentStep {
-                    display: block;
-                }
+
+
+    .form {
+        .step {
+            display: none;
+
+            &.currentStep {
+                display: block;
             }
         }
     }
+
    
 }
