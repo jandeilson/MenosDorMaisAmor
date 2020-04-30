@@ -30,6 +30,15 @@ export const TestimonialSchema = new Schema(
             type: Number,
             trim: true
         },
+        category: {
+            type: String,
+            trim: true,
+            required: true
+        },
+        help: {
+            type: Boolean,
+            require: true
+        },
         media: {
             type: Array,
             trim: true,

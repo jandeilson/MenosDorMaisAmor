@@ -15,6 +15,7 @@ query {
       text
       state
       city
+      category
       interests
     }
   }

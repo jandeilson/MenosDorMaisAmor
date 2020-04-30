@@ -8,6 +8,8 @@ query ($testimonialId: MongoID!) {
         text
         state
         city
+        category
+        help
     }
   }
 `;

@@ -1,5 +1,7 @@
 <div class="helper-form">
     <form #f="ngForm" (ngSubmit)="submit(f)" class="form">
+        <h4>Antes de continuar...</h4>
+        <h6>Precisamos das seguintes informações sobre você:</h6>
         <div class="form-group">
             <label for="firstName"></label>
             <input 
@@ -10,12 +12,39 @@
                 id="firstName" type="text" placeholder="Nome" class="form-control">
             
                 <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
-                <div *ngIf="firstName.errors.required">Name is required.</div>
+                <div *ngIf="firstName.errors.required">Precisamos do seu nome.</div>
             </div>
         </div>
+        <div class="form-group">
+            <label for="email"></label>
+            <input 
+                ngModel
+                required 
+                name="email" 
+                #email="ngModel"
+                id="email" type="text" placeholder="E-mail" class="form-control">
+            
+                <div class="alert alert-danger" *ngIf="email.touched && !telphone.valid">
+                <div *ngIf="email.errors.required">Precisamos do seu e-mail.</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="telphone"></label>
+            <input 
+                ngModel
+                required 
+                name="telphone" 
+                #telphone="ngModel"
+                id="telphone" type="text" placeholder="Telefone" class="form-control">
+            
+                <div class="alert alert-danger" *ngIf="telphone.touched && !telphone.valid">
+                <div *ngIf="telphone.errors.required">Precisamos do seu telefone.</div>
+            </div>
+        </div>
+        
+        <button class="btn btn-default" [disabled]="!f.valid">Ajudar!</button>
 
-        <p> {{ f.value | json }} </p>
+        <small>Leia nossa <a href="#">política de privacidade</a> para saber como cuidamos dos seus dados pessoais.</small>
 
-        <button class="btn btn-primary" [disabled]="!f.valid">Enviar</button>
     </form>
 </div>

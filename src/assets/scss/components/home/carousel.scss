@@ -4,95 +4,99 @@
     }
 }
 
-.testimonials-carousel {
-    width: 550px;
-    display: block;
+.carousel {
+    overflow: hidden;
 
-    .owl-theme {
-        .owl-dots {
-            margin-top: 40px;
-            .owl-dot {
-                
-                &.active{
-                    span {
-                        background: $default-green;
-                        box-shadow: 0px 0px 8px rgba(71, 220, 86, 1);
-                    }
-                }
-                
-                span {
-                    width: 35px;
-                    height: 3px;
-                    margin: 0;
-                    border-radius: 0; 
-                    background: $default-green;
-                    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.13);
-
+    .testimonials-carousel {
+        width: 550px;
+        display: block;
+        
+        .owl-theme {
+            .owl-dots {
+                margin-top: 40px;
+                .owl-dot {
                     
-                    &:hover {
+                    &.active{
+                        span {
+                            background: $default-green;
+                            box-shadow: 0px 0px 8px rgba(71, 220, 86, 1);
+                        }
+                    }
+                    
+                    span {
+                        width: 35px;
+                        height: 3px;
+                        margin: 0;
+                        border-radius: 0; 
                         background: $default-green;
+                        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.13);
+    
+                        
+                        &:hover {
+                            background: $default-green;
+                        }
                     }
                 }
             }
         }
-    }
-
-
-
-    .carousel-block {
-        height: 320px;
-        border-radius: 7px;
-        padding: 3px;
-        counter-increment: gallery-cell;
-        background: $default-green-gradient;
-        opacity: 1;
-        cursor: pointer;
-
-        .content {
-            padding: 25px 20px;
+    
+    
+    
+        .carousel-block {
+            height: 320px;
             border-radius: 7px;
-            height: 314px;
-            background-color: $white;
-
-            .user-testimonial {
-                height: 220px;
-                p {
-                    font-size: 0.92rem;
-                    color: $default-grey
-                }
-            }
-            .user-info {
-                height: 60px;
-                h5 {
-                    font-size: 1.1rem;
-                }
-                h6 {
-                    color: $default-grey;
-                }
-            }
-        }
-
-
-        &.is-selected {
+            padding: 3px;
+            counter-increment: gallery-cell;
+            background: $default-green-gradient;
+            opacity: 1;
+            cursor: pointer;
+    
             .content {
+                padding: 25px 20px;
+                border-radius: 7px;
+                height: 314px;
                 background-color: $white;
-                -webkit-transition: background-color 0.75s ease-out;
-                -moz-transition: background-color 0.75s ease-out;
-                -o-transition: background-color 0.75s ease-out;
-                transition: background-color 0.75s ease-out;
+    
+                .user-testimonial {
+                    height: 220px;
+                    p {
+                        font-size: 0.92rem;
+                        color: $default-grey
+                    }
+                }
+                .user-info {
+                    height: 60px;
+                    h5 {
+                        font-size: 1.1rem;
+                    }
+                    h6 {
+                        color: $default-grey;
+                    }
+                }
             }
+    
+    
+            &.is-selected {
+                .content {
+                    background-color: $white;
+                    -webkit-transition: background-color 0.75s ease-out;
+                    -moz-transition: background-color 0.75s ease-out;
+                    -o-transition: background-color 0.75s ease-out;
+                    transition: background-color 0.75s ease-out;
+                }
+            }
+            
         }
-        
-    }
-
-    // Breakpoints
-    $breakpoint-mobile: 375px;
-
-    @media only screen and (min-width: $breakpoint-mobile) {
-       
-    }
-
-    @media only screen and (max-width: $breakpoint-mobile) {
-        
+    
+        // Breakpoints
+        $breakpoint-mobile: 375px;
+    
+        @media only screen and (min-width: $breakpoint-mobile) {
+           
+        }
+    
+        @media only screen and (max-width: $breakpoint-mobile) {
+            
+        }
     }
 }

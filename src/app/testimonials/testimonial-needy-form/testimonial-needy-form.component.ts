@@ -54,7 +54,8 @@ export class TestimonialNeedyFormComponent implements OnInit {
       textTestimonial: new FormControl('', Validators.required),
       mediaPhotos: new FormArray([]),
       state: new FormControl('', Validators.required),
-      city: new FormControl('', Validators.required)
+      city: new FormControl('', Validators.required),
+      category: new FormControl('', Validators.required)
     }),
     user: new FormGroup({
       firstName: new FormControl('', Validators.required),
@@ -73,6 +74,7 @@ export class TestimonialNeedyFormComponent implements OnInit {
       testimonial: this.form.get('testimonial.textTestimonial'),
       state: this.form.get('testimonial.state'),
       city: this.form.get('testimonial.city'),
+      category: this.form.get('testimonial.category'),
       
       // User Group
       firstName: this.form.get('user.firstName'),

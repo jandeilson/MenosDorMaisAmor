@@ -12,4 +12,5 @@ export class CommonButtonComponent {
     @Input() title: string;
 
     constructor() { }
+    
 }

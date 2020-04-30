@@ -11,6 +11,32 @@ Styles Structure
 
 body {
     font-family: 'Poppins', sans-serif;
+
+    &.loadingSomething {
+        overflow: hidden;
+    }
+}
+
+.loadingSomething {
+    position: fixed;
+    background: white;
+    top: 0;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+
+    &:before {
+        background: url(assets/images/logo.svg);
+        background-size: 256px;
+        background-repeat: no-repeat;
+        height: 100vh;
+        content: '';
+        background-repeat: no-repeat;
+        background-position: center center;
+        display: block;
+    }
 }
 
 .container {
@@ -19,6 +45,7 @@ body {
         padding-right: 30px;
     }
 }
+
 
 
 // Modal
@@ -46,8 +73,8 @@ body {
 // Buttons
 .btn-default {
     color: #fff;
-    background-color: $default-green;
-    border-color: $default-green;
+    background-color: $default-green-1;
+    border-color: $default-green-1;
     border-radius: 100px;
     width: 100%;
     padding: 10px 0;
@@ -56,6 +83,7 @@ body {
     &.style1 {
         //border-radius: 0.25rem;
         box-shadow: 0px 0 10px rgba(0, 0, 0, 0.13);
+        padding: 4px;
 
         &:active, &:focus {
             box-shadow: 0px 0 10px rgba(0, 0, 0, 0.26);
@@ -64,14 +92,14 @@ body {
 
     &:hover {
         color: #fff;
-        background-color: $default-green;
-        border-color: $default-green;
+        background-color: $default-green-1;
+        border-color: $default-green-1;
     }
 
 
     &:active, &:focus {
-        background-color: $default-green;
-        border-color: $default-green;
+        background-color: $default-green-1;
+        border-color: $default-green-1;
         box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.26);
     }
 }

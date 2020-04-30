@@ -1,15 +1,18 @@
-<div class="needy-detail">
-    <div *ngIf="loading">Carregando...</div>
-    <div *ngIf="!loading">
-    <h5>{{ testimonial.firstName }} {{ testimonial.lastName }}</h5>
-    <h6>{{ testimonial.city }}, {{ testimonial.state }}</h6>
+<ng-template #detail>
+    <div class="testimonial-detail">
+        <div class="badge-testimonial {{testimonial.category}}"></div>
 
-    <p>{{ testimonial.text }}</p>
+        <h5>{{ testimonial.firstName }} {{ testimonial.lastName }}</h5>
+        <h6>{{ testimonial.city }}, {{ testimonial.state }}</h6>
 
-    <!-- Media here -->
+        <p>{{ testimonial.text }}</p>
 
-    <div class="text-center">
-        <common-button [testimonialId]="testimonial._id"  title="Quero diminuir essa dor!"></common-button>
-    </div>
-    </div>
+        <!-- Media here -->
+
+        <div class="text-center">
+            <common-button *ngIf="testimonial.help === true" [testimonialId]="testimonial._id"  title="Quero diminuir essa dor!" (click)="goHelp()"></common-button>
+        </div>
 </div>
+</ng-template>
+
+<div *ngIf="loading; else detail" class="loadingSomething"></div>

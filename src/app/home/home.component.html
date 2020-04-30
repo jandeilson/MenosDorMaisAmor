@@ -1,3 +1,4 @@
+<ng-template #home>
 <section id="home">
     <div class="carousel">
         <div class="container default">
@@ -8,7 +9,7 @@
                             <div class="content">
                                 <div class="user-testimonial">
                                     <p>
-                                        {{ user.testimonial.text | summary }}
+                                        {{ user.testimonial.text | summary:200 }}
                                     </p>
                                 </div>
                                 <div class="user-info">
@@ -26,8 +27,9 @@
     <div class="cta">
         <div class="container default">
             <div class="help-needy text-center">
-                <p>Lorem ipsum dolor sit amet, nsectetur adipiscing sce vehiculsectetuLorem ipsum dolor sit amet, cLorem ipsum dolor sit a</p>
-                <button routerLink="/needy/testimonial" class="btn btn-light">Eu tenho uma dor!</button>
+                <p>Compartilhe um sentimento de <strong>amor</strong> ou uma sensação de <strong>dor</strong>!</p>
+                <p>Estamos todos juntos compartilhando sentimentos e sensações para tocar uns aos outros.</p>
+                <button routerLink="/needy/testimonial" class="btn btn-light">Compartilhar!</button>
             </div>
         </div>
     </div>
@@ -40,23 +42,27 @@
                 <li class="list-group-item" [ngClass]="{'active': filterActive === 'Mais vistos' }" (click)="filterByInterests($event)">Mais vistos</li>
                 <li class="list-group-item" [ngClass]="{'active': filterActive === 'Estado' }" (click)="filterByStates($event, testimonials)">Estado</li>
             </ul>
-
-            <div >
+            <div>
                 <div 
                     *ngFor="let user of users; let i=index" 
                     [ngClass]="{'active': testimonialEvent === i }" 
                     (click)="goToTestimonial(i)"
-                    class="needy-testimonial" >
+                    class="testimonial-archive" >
                     <div>
                         <div class="info">
-                            <h5>{{ user.firstName }} {{ user.lastName }}</h5><small>compartilhou:</small>
-                            
+                            <h5>{{ user.firstName }} {{ user.lastName }}</h5>
+                            <div class="badge-testimonial {{user.testimonial.category}}"></div>
                         </div>
                         <div class="text">
                             <p>{{ user.testimonial.text }}</p>
-                            <h6>{{ user.testimonial.city }}, {{ user.testimonial.state }}</h6>
-                            <div class="text-center pb-3 py-3">
-                                <interested-button [testimonialId]="user.testimonial._id" [count]="user.testimonial.interests"></interested-button>
+                            <div class="row">
+                                <div class="col">
+                                    <h6>{{ user.testimonial.city }}, {{ user.testimonial.state }}</h6>
+                                </div>
+                                <div class="col">
+                                    <interested-button *ngIf="user.testimonial.category === 'love'" [testimonialId]="user.testimonial._id" [count]="user.testimonial.interests" title="Sinta amor"></interested-button>
+                                    <interested-button *ngIf="user.testimonial.category === 'pain'" [testimonialId]="user.testimonial._id" [count]="user.testimonial.interests" title="Doe amor"></interested-button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -66,3 +72,6 @@
         </div>
     </div>
 </section>
+</ng-template>
+
+<div *ngIf="loading; else home" class="loadingSomething"></div>

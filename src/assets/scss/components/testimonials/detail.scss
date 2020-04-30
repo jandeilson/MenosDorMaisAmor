@@ -1,4 +1,7 @@
-.needy-detail {
+.testimonial-detail {
+
+    margin: 30px 0 0 0;
+
     
     h5 {
         font-size: 1.2rem;
@@ -16,6 +19,33 @@
     p {
         margin: 25px 0;
         color: $default-grey;
+    }
+
+    .badge-testimonial {
+            width: 100px;
+            height: 40px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.13);
+            padding: 24px;
+            border-radius: 7px;
+            display: inline-block;
+            position: absolute;
+            top: -24px;
+            left: 0;
+            right: 0;
+            margin: auto;
+
+            &.love {
+                background: url(assets/images/love-icon.svg); 
+                background-repeat: no-repeat;
+                background-position: center center;   
+                background-color: white;
+            }
+            &.pain {
+                background: url(assets/images/pain-icon.svg);
+                background-repeat: no-repeat;
+                background-position: center center;   
+                background-color: white;
+            }
     }
 
 }

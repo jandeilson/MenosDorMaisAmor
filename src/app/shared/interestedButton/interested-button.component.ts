@@ -5,12 +5,13 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'interested-button',
     template: `
-    <button class="btn btn-default style1" (click)="upInterest()">Como diminuir essa dor?</button>
+    <button class="btn btn-default style1" (click)="upInterest()">{{title}}</button>
     `,
 })
 
 export class InterestedButtonComponent {
     @Input() testimonialId: number;
+    @Input() title: string;
     @Input() count: number;
 
     constructor(private interestsGQL: InterestsGQL, private router: Router) {}

@@ -12,7 +12,7 @@ import { DefaultPageComponent } from './shared/default-page/default-page.compone
 
 const routes: Routes = [
   { path: '',  component: HomeComponent },
-  { path: 'testimonials', component: TestimonialsComponent},
+  { path: 'testimonials', component: TestimonialsComponent },
   { path: 'needy', component: DefaultPageComponent, 
     children: [
       {

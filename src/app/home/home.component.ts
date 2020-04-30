@@ -80,7 +80,6 @@ export class HomeComponent implements OnInit {
           const usersQuery = data.userMany;
           const testimonialsQuery = data.testimonialMany;
 
-
           // Assign testimonial query to users query
           const m = new Map();
           
@@ -90,12 +89,7 @@ export class HomeComponent implements OnInit {
           });
           
           testimonialsQuery.forEach((obj: any) => {
-            let object = m.get(obj.user);
-            
-            if (object === undefined)
-              m.set(obj.user, { testimonial: obj });
-            else 
-              Object.assign(object, { testimonial: obj });
+            Object.assign(m.get(obj.user), { testimonial: obj });
           });
 
           // Return only users have testimonial
@@ -104,7 +98,7 @@ export class HomeComponent implements OnInit {
           // Data from our database
           this.queryData = usersFiltered;
           this.users = usersFiltered;
-        
+
           this.loading = loading;
         }
       );

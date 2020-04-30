@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from "apollo-angular";
 import { testimonialQuery, userQuery } from '../../graphql/detail-testimonial';
 
@@ -15,7 +15,7 @@ export class TestimonialDetailComponent implements OnInit {
 
   testimonial: any;
 
-  constructor(private apollo: Apollo, private route: ActivatedRoute) {}
+  constructor(private apollo: Apollo, private route: ActivatedRoute, private router: Router) {}
 
   //TODO optimize this
   getTestimonialUser(testimonial) {
@@ -36,6 +36,10 @@ export class TestimonialDetailComponent implements OnInit {
     );
   }
 
+
+  goHelp() {
+    this.router.navigate(['/testimonial', this.id, 'helper'])
+  }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
