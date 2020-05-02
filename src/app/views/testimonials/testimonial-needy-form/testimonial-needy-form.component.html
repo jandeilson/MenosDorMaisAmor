@@ -6,7 +6,6 @@
                 <h4>Compartilhe seu depoimento!</h4>
                 <h6>Seja ele um sentimento de amor ou uma sensação de dor.</h6>
                 <div class="form-group">
-                    <label for="textTestimonial"></label>
                     <textarea 
                         formControlName="textTestimonial" name="textTestimonial" 
                         id="textTestimonial" cols="30" rows="10" placeholder="Escreva seu depoimento" class="form-control"></textarea>
@@ -16,32 +15,55 @@
                     </div>
                 </div>
 
-                <h4>Fotos podem enriquecer seu depoimento</h4>
+                <h4>Acrescente fotos!</h4>
+                <h6>Fotos podem enriquecer seu depoimento.</h6>
                 <div class="form-group">
-                    <label for="mediaPhotos"></label>
-                    <input 
-                        formArrayName="mediaPhotos" name="mediaPhotos" 
-                        type="file" id="mediaPhotos" (change)="detectFiles($event)" accept="image/*" multiple>
-                </div>     
-                <br>
-                <h4>Seu depoimento é</h4>
-                <div class="form-group">
-                    <label for="category"></label>
-                    <select 
-                        formControlName="category" name="category"
-                        class="form-control" id="category">
-                        <option value="love" selected>Um sentimento de Amor</option>
-                        <option value="pain">Uma sensação de Dor</option>
+                    <div class="custom-file">
+                        <input 
+                            class="custom-file-input" formArrayName="mediaPhotos" name="mediaPhotos"  class="custom-file-input"
+                            type="file" id="mediaPhotos" (change)="uploadFiles($event)" accept="image/*" lang="pt" multiple>
+                        <label class="custom-file-label" for="validatedCustomFile">
+                            <div *ngIf="form.value.testimonial.mediaPhotos.length > 0; else labelFile">
+                                {{form.value.testimonial.mediaPhotos.length}} fotos...
+                            </div>
+                            <ng-template #labelFile>
+                                Escolha...
+                            </ng-template>
+                        </label>
+
+                        <div *ngIf="fileUploadProgress" class="text-center">Progresso do upload: {{ fileUploadProgress }}%</div>
+                        <div *ngIf="fileUploadProgress == 100" class="text-center">Upload concluído!</div>
+                    </div>
+                </div>
+
+                <h4>Seu depoimento é:</h4>
+                <div class="form-group ">
+                    <select formControlName="category" name="category" id="category" class="custom-select">
+                        <option value="love" selected>um sentimento de Amor</option>
+                        <option value="pain">uma sensação de Dor</option>
                     </select>
+                </div>
+
+                <h4>Você precisa de ajuda?</h4>
+                <h6>Em caso positivo, as pessoas que lerem seu depoimento poderão te ajudar.</h6>
+                <div class="form-group text-center">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input class="custom-control-input" type="radio" formControlName="help" name="help" id="help-yes" [value]=true>
+                        <label class="custom-control-label" for="help-yes">Sim</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input class="custom-control-input" type="radio" formControlName="help" name="help" id="help-no" [value]=false>
+                        <label class="custom-control-label" for="help-no">Não</label>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="step" [ngClass]="formStep ? 'currentStep' : ''">
             <div formGroupName="user">
-                <h4>Precisamos saber um pouco de você!</h4>
+                <h4>Então... quem é você?</h4>
+                <h6>Precisamos de algumas informações básicas sobre você.</h6>
                 <div class="form-group">
-                    <label for="firstName"></label>
                     <input 
                         formControlName="firstName" name="firstName" 
                         id="firstName" type="text" placeholder="Nome" class="form-control">
@@ -51,7 +73,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="lastName"></label>
                     <input 
                         formControlName="lastName" name="lastName"
                         id ="lastName" type="text" placeholder="Sobrenome" class="form-control">
@@ -61,7 +82,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="Email"></label>
                     <input 
                         formControlName="email" name="email"
                         id ="email" type="email" placeholder="E-mail" class="form-control">
@@ -71,7 +91,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="phone"></label>
                     <input 
                         formControlName="phone" name="phone"
                         id="phone" type="number" placeholder="Telefone" class="form-control">
@@ -84,36 +103,34 @@
 
             <div formGroupName="testimonial">
                 <div class="form-group">
-                    <label for="state"></label>
                     <select 
                         formControlName="state" name="state"
-                        class="form-control" id="state" placeholder="Estado" (change)="citiesState($event)">
+                        class="custom-select" id="state" (change)="citiesState($event)">
                         <option value="" disabled selected>Estado</option>
                         <option *ngFor="let state of states | async" [value]="state.name" [attr.state-id]="state._id">{{ state.name }}</option>
                     </select>
                 </div>
-
+                
                 <div *ngIf="loading" class="loading">
                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span>Carregando cidades...</span>
                 </div>
 
                 <div *ngIf="cities && !loading" class="form-group">
-                    <label for="city"></label>
                     <select 
                         formControlName="city" name="city"
-                        class="form-control" id="city" placeholder="Cidade">
+                        class="custom-select" id="city">
                         <option value="" disabled selected>Cidade</option>
                         <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
                     </select>
-                </div> 
+                </div>
+
             </div>
 
-            <button class="btn btn-default" [disabled]="f.valid">Enviar</button>
+            <button class="btn btn-default" [disabled]="!form.valid">Enviar</button>
 
             <small>Leia nossa <a href="#">política de privacidade</a> para saber como cuidamos dos seus dados pessoais.</small>
         </div>
 
     </form>
-
     <button class="btn btn-default" (click)="formSteps()">{{ formStepText }}</button>
 </div>

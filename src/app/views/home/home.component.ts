@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { queryUsersAndTestimonails } from '../graphql/home'
+import { queryUsersAndTestimonails } from '../../graphql/home'
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { StatesModalComponent } from './modals/states-modal/states-modal.component';
 import { FiltersComponent } from './filters/filters.component';

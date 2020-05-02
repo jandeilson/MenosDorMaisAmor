@@ -26,6 +26,10 @@ export const UserSchema = new Schema({
         type: Number,
         trim: true,
         required: true,
+    },
+    helper: {
+        type: Boolean,
+        required: false,
     }
 },
 { 

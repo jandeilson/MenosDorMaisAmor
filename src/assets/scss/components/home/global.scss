@@ -17,6 +17,32 @@
         }
     }
 
+    .badge-testimonial {
+        width: 80px;
+        height: 40px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        
+
+        &.carousel {
+            top: inherit;
+            bottom: 28px;
+            right: 20px;
+        }
+
+        &.love {
+            background: url(assets/images/love-icon.svg); 
+            background-repeat: no-repeat;
+            background-position: right;   
+        }
+        &.pain {
+            background: url(assets/images/pain-icon.svg);
+            background-repeat: no-repeat;
+            background-position: right;   
+        }
+        
+    }
 
     .list-filter {
         border: 2px solid #DCDCDC;
@@ -93,7 +119,7 @@
     .testimonial-archive {
         padding: 10px 5px;
         border-radius: 7px;
-        max-height: 200px;
+        max-height: 128px;
         background-color: $white;
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.13);
         margin-top: -10px;
@@ -110,26 +136,6 @@
         -ms-user-select: none;
         user-select: none;
         position: relative;
-
-        .badge-testimonial {
-            width: 80px;
-            height: 40px;
-            position: absolute;
-            right: 0;
-            top: 0;
-    
-            &.love {
-                background: url(assets/images/love-icon.svg); 
-                background-repeat: no-repeat;
-                background-position: right;   
-            }
-            &.pain {
-                background: url(assets/images/pain-icon.svg);
-                background-repeat: no-repeat;
-                background-position: right;   
-            }
-        }
-
 
         &:hover, &.active {
             box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.29);
@@ -165,6 +171,7 @@
             h6 {
                 color: $default-grey;
                 font-size: 0.9rem;
+                font-style: italic;
             }
 
         }

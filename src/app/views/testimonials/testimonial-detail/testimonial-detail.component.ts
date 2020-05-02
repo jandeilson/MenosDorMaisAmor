@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Apollo } from "apollo-angular";
-import { testimonialQuery, userQuery } from '../../graphql/detail-testimonial';
+import { testimonialQuery, userQuery } from '../../../graphql/detail-testimonial';
 
 @Component({
   selector: 'testimonial-detail',

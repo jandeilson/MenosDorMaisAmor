@@ -3,7 +3,6 @@
         <h4>Antes de continuar...</h4>
         <h6>Precisamos das seguintes informações sobre você:</h6>
         <div class="form-group">
-            <label for="firstName"></label>
             <input 
                 ngModel
                 required 
@@ -16,7 +15,18 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="email"></label>
+            <input 
+                ngModel
+                required 
+                name="lastName" 
+                #lastName="ngModel"
+                id="lastName" type="text" placeholder="Sobrenome" class="form-control">
+            
+                <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
+                <div *ngIf="lastName.errors.required">Precisamos do seu sobrenome.</div>
+            </div>
+        </div>
+        <div class="form-group">
             <input 
                 ngModel
                 required 
@@ -24,21 +34,21 @@
                 #email="ngModel"
                 id="email" type="text" placeholder="E-mail" class="form-control">
             
-                <div class="alert alert-danger" *ngIf="email.touched && !telphone.valid">
+                <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
                 <div *ngIf="email.errors.required">Precisamos do seu e-mail.</div>
+                <div *ngIf="email.errors.email">Precisamos de um e-mail válido.</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="telphone"></label>
             <input 
                 ngModel
                 required 
-                name="telphone" 
-                #telphone="ngModel"
-                id="telphone" type="text" placeholder="Telefone" class="form-control">
+                name="phone" 
+                #phone="ngModel"
+                id="phone" type="number" placeholder="Telefone" class="form-control">
             
-                <div class="alert alert-danger" *ngIf="telphone.touched && !telphone.valid">
-                <div *ngIf="telphone.errors.required">Precisamos do seu telefone.</div>
+                <div class="alert alert-danger" *ngIf="phone.touched && !phone.valid">
+                <div *ngIf="phone.errors.required">Precisamos do seu telefone.</div>
             </div>
         </div>
         

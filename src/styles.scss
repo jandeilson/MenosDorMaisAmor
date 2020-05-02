@@ -104,6 +104,11 @@ body {
     }
 }
 
+.custom-file-label::after {
+    content: 'Procurar';
+}
+
+
 
 // Forms
 
@@ -118,6 +123,32 @@ body {
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgba(71, 220, 86, 0.25);
     }
+}
+
+.custom-select {
+    border-color: #f2f2f2;
+
+    &:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: $default-green;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(71, 220, 86, 0.25);
+    }
+}
+
+.custom-file-input:focus ~ .custom-file-label {
+    border-color: $default-green;
+    box-shadow: 0 0 0 0.2rem rgba(71, 220, 86, 0.25);
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 0.2rem rgba(71, 220, 86, 0.25);
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    border-color: $default-green;
+    background-color: $default-green;
 }
 
 .alert {

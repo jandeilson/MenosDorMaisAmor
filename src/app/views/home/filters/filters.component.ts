@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { queryStates } from '../../graphql/home'
+import { queryStates } from '../../../graphql/home'
 
 @Component({
   selector: 'filters',
