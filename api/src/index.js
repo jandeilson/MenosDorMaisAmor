@@ -36,6 +36,7 @@ server.applyMiddleware({
         }),
 });
 
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
