@@ -15,7 +15,7 @@ const app = express();
 
 const server = new ApolloServer({
     schema,
-    cors: true,
+    cors: false,
     playground: process.env.NODE_ENV === 'development' ? true : false,
     introspection: true,
     tracing: true,
@@ -25,7 +25,7 @@ const server = new ApolloServer({
 server.applyMiddleware({
     app,
     path: '/graphql',
-    cors: true,
+    cors: false,
     onHealthCheck: () =>
         // eslint-disable-next-line no-undef
         new Promise((resolve, reject) => {
