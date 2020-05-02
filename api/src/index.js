@@ -15,7 +15,7 @@ const app = express();
 
 const server = new ApolloServer({
     schema,
-    cors: false,
+    cors: true,
     playground: process.env.NODE_ENV === 'development' ? true : false,
     introspection: true,
     tracing: true,
@@ -25,7 +25,7 @@ const server = new ApolloServer({
 server.applyMiddleware({
     app,
     path: '/graphql',
-    cors: false,
+    cors: true,
     onHealthCheck: () =>
         // eslint-disable-next-line no-undef
         new Promise((resolve, reject) => {
@@ -36,7 +36,7 @@ server.applyMiddleware({
         }),
 });
 
-app.use(cors());
+
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
