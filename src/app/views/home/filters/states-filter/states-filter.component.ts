@@ -1,25 +1,31 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component } from '@angular/core';
+import { Apollo } from 'apollo-angular';
+import { queryStates } from '../../../../graphql/home'
 
 @Component({
   selector: 'states-filter',
-  templateUrl: './states-filter.component.html',
-  styleUrls: ['../../../../../assets/scss/components/home/modal.scss']
+  templateUrl: './states-filter.component.html'
 })
-export class StatesFilterComponent implements OnInit {
+export class StatesFilter {
 
-  @Input() public data: any;
+  public loading: boolean = true;
+  public states: any[];
 
-  passBack(event: any){
-    //const stateId = event.target.getAttribute('state-id');
-    const stateName = event.target.textContent;
-    this.activeModal.close(stateName);
-  }
+ 
+  constructor(private apollo: Apollo) {}
   
-  constructor(public activeModal: NgbActiveModal) { }
-
-  ngOnInit(): void {
-    //console.log(this.data)
+  getStates() {
+    this.apollo
+    .query<any>({
+      query: queryStates
+    })
+    .subscribe(
+      ({ data, loading }) => {
+        this.states = data.stateMany;
+        this.loading = loading;
+      }
+    );
   }
+
 
 }

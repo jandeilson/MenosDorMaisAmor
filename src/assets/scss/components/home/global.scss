@@ -50,7 +50,7 @@
         border-radius: 100px;
         padding: 4px 2px;
         width: 320px;
-        margin: 0 0 60px 0;
+        margin: 0 auto 60px auto;
 
         .list-group-item {
             background: transparent;
@@ -187,5 +187,6 @@
             transition: $transition;
         }
     }
+
 }
 

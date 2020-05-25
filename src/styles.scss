@@ -68,6 +68,47 @@ body {
     margin: 0 15px;
 }
 
+// Datepicker
+.datepicker {
+    width: 235px;
+    margin: 0 auto 10px auto;
+
+    ngb-datepicker {
+        border: none !important;
+        border-radius: 0 !important;
+
+        .ngb-dp-header {
+            background: transparent;
+        }
+    
+        .ngb-dp-weekdays {
+            border-bottom: none;
+            border-radius: 0;
+            background-color: transparent;
+        }
+
+        .ngb-dp-weekday {
+            color: black;
+        }
+        
+        .ngb-dp-month {
+            margin: auto;
+        }
+
+        .bg-primary {
+            background: black !important;
+        }
+
+        .btn-link {
+            color: black;
+        }
+    
+    
+    }
+}
+
+
+
 
 
 // Buttons
@@ -111,7 +152,6 @@ body {
 
 
 // Forms
-
 .form-control {
     border: 1px solid #f2f2f2;
     //color: #B8B8B8;

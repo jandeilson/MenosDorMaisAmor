@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatesFilter } from './states-filter.component';
+import { StatesFilterModalComponent } from './states-filter-modal.component';
 
-describe('StatesFilter', () => {
-  let component: StatesFilter;
-  let fixture: ComponentFixture<StatesFilter>;
+describe('StatesFilterModalComponent', () => {
+  let component: StatesFilterModalComponent;
+  let fixture: ComponentFixture<StatesFilterModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatesFilter ]
+      declarations: [ StatesFilterModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StatesFilter);
+    fixture = TestBed.createComponent(StatesFilterModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

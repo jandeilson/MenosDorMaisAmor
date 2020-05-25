@@ -17,6 +17,7 @@ query {
       city
       category
       interests
+      createdAt
     }
   }
 `;

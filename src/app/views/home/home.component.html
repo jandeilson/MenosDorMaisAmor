@@ -3,7 +3,7 @@
     <div class="carousel">
         <div class="container default">
             <owl-carousel-o [options]="customOptions" class="testimonials-carousel">
-                <ng-container *ngFor="let user of users" >
+                <ng-container *ngFor="let user of usersCarousel">
                     <ng-template carouselSlide [id]="user.id">
                         <div class="carousel-block" [routerLink]="['/testimonial', user.testimonial._id]">
                             <div class="content">
@@ -40,7 +40,7 @@
         <div class="container default">
             <div class="filterByText">Filtrar por:</div>
             <ul class="list-filter list-group list-group-horizontal" >
-                <li class="list-group-item" [ngClass]="{'active': filterActive === 'Data' }" (click)="filterByStates($event, testimonials)">Data</li>
+                <li class="list-group-item" [ngClass]="{'active': filterActive === 'Data' }" (click)="filterByDate($event, testimonials)">Data</li>
                 <li class="list-group-item" [ngClass]="{'active': filterActive === 'Mais vistos' }" (click)="filterByInterests($event)">Mais vistos</li>
                 <li class="list-group-item" [ngClass]="{'active': filterActive === 'Estado' }" (click)="filterByStates($event, testimonials)">Estado</li>
             </ul>

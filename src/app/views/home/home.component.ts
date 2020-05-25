@@ -4,8 +4,8 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { queryUsersAndTestimonails } from '../../graphql/home'
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { StatesModalComponent } from './modals/states-modal/states-modal.component';
-import { FiltersComponent } from './filters/filters.component';
-
+import { StatesFilter } from './filters/states-filter/states-filter.component';
+import { DateModalComponent } from './modals/date-modal/date-modal.component';
 
 @Component({
   selector: 'home',
@@ -14,38 +14,54 @@ import { FiltersComponent } from './filters/filters.component';
 export class HomeComponent implements OnInit {
   
   public users: any[];
-  queryData: any[];
+  public usersCarousel: any[];
+  public queryUsers: any[];
   loading: boolean = true;
   testimonialsCarousel: any;
   testimonialEvent: any;
-  filterActive: any;
+  filterActive: any = 'Mais vistos';
 
-  constructor(private apollo: Apollo, private modalService: NgbModal, private FiltersComponent: FiltersComponent) {}
+  constructor(private apollo: Apollo, private modalService: NgbModal, private StatesFilter: StatesFilter) {}
 
-  filterByStates(event, testimonials) {
+  filterByStates(event: any, testimonials: any) {
     this.filterActive = event.target.textContent;
-    this.FiltersComponent.getStates();
+    this.StatesFilter.getStates();
     const modalRef = this.modalService.open(StatesModalComponent, { centered: true });
-    modalRef.componentInstance.data = this.FiltersComponent;
+    modalRef.componentInstance.data = this.StatesFilter;
 
     modalRef.result.then((stateName) => {
-      const result = this.queryData.filter((result) => {
-        if (result.testimonial.state === stateName) 
-          return result;
-      });
-      
+      if (stateName === 'Todos os estados') {
+        this.users = this.queryUsers;
+      } else {
+        const result = this.queryUsers.filter((result) => {
+          if (result.testimonial.state === stateName) 
+            return result;
+        });
 
-      this.users = result;
+        this.users = result;
+      }
+
       testimonials.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
-      
     });
   }
 
-  filterByInterests(event) {
+  filterByDate(event: any, testimonials: any) {
     this.filterActive = event.target.textContent;
-    this.users.sort((a, b) => {
-      return b.testimonial.interests - a.testimonial.interests;
+    const modalRef = this.modalService.open(DateModalComponent, { centered: true });
+
+    modalRef.result.then((date) => {     
+      const dateSelected = date.year + '-' + date.month + '-' + date.day;  
+      const usersFiltered = this.queryUsers.filter((user) => new Date(user.testimonial.createdAt).getDate() === new Date(dateSelected).getDate());
+      this.users = usersFiltered;
     });
+    
+  }
+
+  filterByInterests(event: any) {
+    this.filterActive = event.target.textContent;
+    const usersFiltered = this.queryUsers.sort((a, b) => b.testimonial.interests - a.testimonial.interests);
+
+    this.users = usersFiltered;
   }
 
   // Owl Carousel options
@@ -95,9 +111,28 @@ export class HomeComponent implements OnInit {
           // Return only users have testimonial
           const usersFiltered = usersQuery.filter((users: any) => users.testimonial);
 
-          // Data from our database
-          this.queryData = usersFiltered;
+          this.queryUsers = usersFiltered;
           this.users = usersFiltered;
+
+
+          const shuffle = (arrParam: any[]): any[] => {
+            let arr = arrParam.slice(), length = arr.length, temp, i;
+
+            while(length){
+              i = Math.floor(Math.random() * length--);
+              temp = arr[length];
+              arr[length] = arr[i];
+              arr[i] = temp;
+            }
+        
+            return arr;
+          }
+
+          this.usersCarousel = shuffle(usersFiltered).slice(0, 5);
+          
+          this.users.sort((a, b) => {
+            return b.testimonial.interests - a.testimonial.interests;
+          });
 
           this.loading = loading;
         }

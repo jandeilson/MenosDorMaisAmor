@@ -4,14 +4,17 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { SummaryPipe } from '../../pipes/summary.pipe';
 
 import { ModalComponent } from '../../shared/modal-component/modal.component';
 import { HomeComponent } from './home.component';
-import { StatesFilterComponent } from './filters/states-filter/states-filter.component';
+import { StatesFilterModalComponent } from './filters/states-filter-modal/states-filter-modal.component';
 import { StatesModalComponent } from './modals/states-modal/states-modal.component';
-import { FiltersComponent } from './filters/filters.component';
+import { StatesFilter } from './filters/states-filter/states-filter.component';
+import { DateFilterModalComponent } from './filters/date-filter-modal/date-filter-modal.component';
+import { DateModalComponent } from './modals/date-modal/date-modal.component';
 
 import { InterestsGQL } from '../../graphql/interests'
 import { InterestedButtonComponent } from '../../shared/interestedButton/interested-button.component';
@@ -21,9 +24,11 @@ import { InterestedButtonComponent } from '../../shared/interestedButton/interes
     HomeComponent,
     ModalComponent,
     SummaryPipe,
-    StatesFilterComponent,
+    StatesFilterModalComponent,
     StatesModalComponent,
-    FiltersComponent,
+    DateFilterModalComponent,
+    DateModalComponent,
+    StatesFilter,
     InterestedButtonComponent
   ],
   imports: [
@@ -31,15 +36,16 @@ import { InterestedButtonComponent } from '../../shared/interestedButton/interes
     RouterModule,
     BrowserAnimationsModule,
     CarouselModule,
+    FormsModule,
     NgbModule
   ],
   providers: [
     NgbActiveModal,
-    FiltersComponent,
+    StatesFilter,
     InterestsGQL
   ],
   entryComponents: [
-    StatesFilterComponent
+    StatesFilterModalComponent
   ]
 })
 export class HomeModule { }
