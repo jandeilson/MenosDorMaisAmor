@@ -1,0 +1,44 @@
+<section id="howitworks" (click)="step(progress)">
+  <div class="container">
+    <div class="steps">
+      <div class="step one" *ngIf="count === 0" >
+        <figure [hidden]="imgLoad">
+          <figcaption class="figure-caption">Descubra depoimentos de <strong>dor</strong> e aumente o <strong>amor</strong>.</figcaption>
+          <img src="../../../assets/images/pain-icon.svg" class="figure-img" style="height: 64px" alt="Menos Dor Mais Amor" title="Menos Dor Mais Amor" (load)="imgOnLoad()">
+        </figure>
+      </div>
+      <div class="step two" *ngIf="count === 20" >
+        <figure [hidden]="imgLoad">
+          <figcaption class="figure-caption">Descubra depoimentos de <strong>amor</strong> e diminua a <strong>dor</strong>.</figcaption>
+          <img src="../../../assets/images/love-icon.svg" class="figure-img" style="height: 48px" alt="Menos Dor Mais Amor" title="Menos Dor Mais Amor" (load)="imgOnLoad()">
+        </figure>
+      </div>
+      <div class="step three" *ngIf="count === 40">
+        <figure [hidden]="imgLoad">
+          <figcaption class="figure-caption"><strong>Compartilhe seu depoimento!</strong><br> Seja ele um sentimento de amor ou uma sensação de dor.</figcaption>
+          <img src="../../../assets/images/example-testimonial-textarea.png" class="figure-img" style="width: 80%" alt="Menos Dor Mais Amor" title="Menos Dor Mais Amor" (load)="imgOnLoad()">
+        </figure>
+      </div>
+      <div class="step four" *ngIf="count === 60">
+        <figure [hidden]="imgLoad">
+          <figcaption class="figure-caption">Você pode <strong>ajudar</strong> e <strong>receber ajuda</strong> de pessoas de todo o Brasil.</figcaption>
+          <img src="../../../assets/images/example-testimonial.png" class="figure-img" style="width: 100%" alt="Menos Dor Mais Amor" title="Menos Dor Mais Amor" (load)="imgOnLoad()">
+        </figure>
+      </div>
+      <div class="step five" *ngIf="count === 80">
+        <figure [hidden]="imgLoad">
+          <figcaption class="figure-caption"><strong>Seja bem-vindo!</strong></figcaption>
+          <img src="../../../assets/images/logo-square.svg" class="figure-img" style="width: 75%" alt="Menos Dor Mais Amor" title="Menos Dor Mais Amor" (load)="imgOnLoad()">
+          <figcaption class="figure-caption">Juntos vamos <strong>aumentar</strong> o amor e <strong>diminuir</strong> toda dor!</figcaption>
+        </figure>
+      </div> 
+    </div>
+  </div>
+
+  <div *ngIf="imgLoad" class="loading-img spinner-border" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</section>
+<footer>
+  <div class="progress" #progress></div>
+</footer>

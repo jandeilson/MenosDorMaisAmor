@@ -8,6 +8,7 @@ import { TestimonialDetailComponent } from './views/testimonials/testimonial-det
 import { TestimonialHelperFormComponent } from './views/testimonials/testimonial-helper-form/testimonial-helper-form.component';
 import { HomeComponent } from './views/home/home.component'
 import { ThanksComponent } from './views/thanks/thanks.component';
+import { HowItWorksComponent } from './views/howitworks/howitworks.component';
 
 const routes: Routes = [
   { path: '',  component: HomeComponent },

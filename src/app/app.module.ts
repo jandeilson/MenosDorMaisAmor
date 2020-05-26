@@ -12,12 +12,14 @@ import { GraphQLModule } from './graphql.module';
 
 import { AppComponent } from './app.component';
 import { ThanksComponent } from './views/thanks/thanks.component';
+import { HowItWorksComponent } from './views/howitworks/howitworks.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ThanksComponent
+    ThanksComponent,
+    HowItWorksComponent
   ],
   imports: [
     BrowserModule,
