@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { queryUsersAndTestimonails } from '../../graphql/home'
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbActiveModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { StatesModalComponent } from './modals/states-modal/states-modal.component';
 import { StatesFilter } from './filters/states-filter/states-filter.component';
 import { DateModalComponent } from './modals/date-modal/date-modal.component';
@@ -13,9 +13,9 @@ import { DateModalComponent } from './modals/date-modal/date-modal.component';
 })
 export class HomeComponent implements OnInit {
   
-  public users: any[];
-  public usersCarousel: any[];
-  public queryUsers: any[];
+  users: any[];
+  usersCarousel: any[];
+  queryUsers: any[];
   loading: boolean = true;
   testimonialsCarousel: any;
   testimonialEvent: any;
@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   filterByStates(event: any, testimonials: any) {
     this.filterActive = event.target.textContent;
     this.StatesFilter.getStates();
+    
     const modalRef = this.modalService.open(StatesModalComponent, { centered: true });
     modalRef.componentInstance.data = this.StatesFilter;
 
@@ -33,11 +34,7 @@ export class HomeComponent implements OnInit {
       if (stateName === 'Todos os estados') {
         this.users = this.queryUsers;
       } else {
-        const result = this.queryUsers.filter((result) => {
-          if (result.testimonial.state === stateName) 
-            return result;
-        });
-
+        const result = this.queryUsers.filter((result) => result.testimonial.state === stateName);
         this.users = result;
       }
 
@@ -49,12 +46,13 @@ export class HomeComponent implements OnInit {
     this.filterActive = event.target.textContent;
     const modalRef = this.modalService.open(DateModalComponent, { centered: true });
 
-    modalRef.result.then((date) => {     
-      const dateSelected = date.year + '-' + date.month + '-' + date.day;  
-      const usersFiltered = this.queryUsers.filter((user) => new Date(user.testimonial.createdAt).getDate() === new Date(dateSelected).getDate());
-      this.users = usersFiltered;
+    modalRef.result.then((date: string) => {
+      const toDate = (date: string) => new Date(date).getDate();
+      const result = this.queryUsers.filter((result) => toDate(result.testimonial.createdAt) === toDate(date.replace(/-/g, '/')));
+      this.users = result;
+      
+      testimonials.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
     });
-    
   }
 
   filterByInterests(event: any) {
@@ -66,7 +64,7 @@ export class HomeComponent implements OnInit {
 
   // Owl Carousel options
   customOptions: OwlOptions = {
-    loop: false,
+    loop: true,
     center: true,
     mouseDrag: true,
     touchDrag: true,
@@ -76,8 +74,8 @@ export class HomeComponent implements OnInit {
     nav: false,
     responsive: {
       0:{ items: 2 },
-      600:{ items:3 },
-      1000:{ items:6 }
+      600:{ items: 3 },
+      1000:{ items: 6 }
     },
   }
 
@@ -95,10 +93,9 @@ export class HomeComponent implements OnInit {
         ({ data, loading }) => {
           const usersQuery = data.userMany;
           const testimonialsQuery = data.testimonialMany;
-
-          // Assign testimonial query to users query
           const m = new Map();
           
+          // Assign testimonial query to users query
           usersQuery.forEach((obj: any) => {
             obj.testimonial; 
             m.set(obj._id, obj);
@@ -118,7 +115,7 @@ export class HomeComponent implements OnInit {
           const shuffle = (arrParam: any[]): any[] => {
             let arr = arrParam.slice(), length = arr.length, temp, i;
 
-            while(length){
+            while(length) {
               i = Math.floor(Math.random() * length--);
               temp = arr[length];
               arr[length] = arr[i];
@@ -130,9 +127,7 @@ export class HomeComponent implements OnInit {
 
           this.usersCarousel = shuffle(usersFiltered).slice(0, 5);
           
-          this.users.sort((a, b) => {
-            return b.testimonial.interests - a.testimonial.interests;
-          });
+          this.users.sort((a, b) => b.testimonial.interests - a.testimonial.interests);
 
           this.loading = loading;
         }

@@ -25,28 +25,28 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 100vh;
+    height: 100%;
 
     &:before {
         background: url(assets/images/logo.svg);
         background-size: 256px;
         background-repeat: no-repeat;
-        height: 100vh;
+        height: 100%;
         content: '';
         background-repeat: no-repeat;
         background-position: center center;
-        display: block;
+        display: flex;
+        align-items:center;
+        justify-content: center;
     }
 }
 
 .container {
     &.default {
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 12%;
+        padding-right: 12%;
     }
 }
-
-
 
 // Modal
 .modal-backdrop {
@@ -71,7 +71,7 @@ body {
 // Datepicker
 .datepicker {
     width: 235px;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 25px auto;
 
     ngb-datepicker {
         border: none !important;
@@ -106,10 +106,6 @@ body {
     
     }
 }
-
-
-
-
 
 // Buttons
 .btn-default {
@@ -148,7 +144,6 @@ body {
 .custom-file-label::after {
     content: 'Procurar';
 }
-
 
 
 // Forms
@@ -216,11 +211,22 @@ $spacing-between-fc: 0 0 50px 0;
         position: absolute;
         right: 20px;
         top: 20px;
-
     }
 }
 
+// Breakpoints
+$breakpoint-mobile: 374px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 960px;
 
+@media only screen and (max-width: $breakpoint-tablet) {
+    .container {
+        &.default {
+            padding-left: 30px;
+            padding-right:  30px;
+        }
+    }
+}
 
 @import 'assets/scss/layout/header/logo.scss';
 @import 'assets/scss/layout/footer.scss';

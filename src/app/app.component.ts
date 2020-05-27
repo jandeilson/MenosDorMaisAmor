@@ -18,6 +18,7 @@ export class AppComponent implements OnInit{
   }
   
   ngOnInit(): void {
+    localStorage.removeItem('datePicked');
     const getStart = localStorage.getItem('start');
     
     if (getStart === undefined || getStart === null || getStart.length === 0)

@@ -32,6 +32,8 @@
                 <p>Compartilhe um sentimento de <strong>amor</strong> ou uma sensação de <strong>dor</strong>!</p>
                 <p>Estamos todos juntos compartilhando sentimentos e sensações para tocar uns aos outros.</p>
                 <button routerLink="/testimonial/create" class="btn btn-light">Compartilhar!</button>
+
+                <div class="bg"></div>
             </div>
         </div>
     </div>
@@ -49,7 +51,7 @@
                     *ngFor="let user of users; let i=index" 
                     [ngClass]="{'active': testimonialEvent === i }" 
                     (click)="goToTestimonial(i)"
-                    class="testimonial-archive" >
+                    class="testimonial-archive">
                     <div>
                         <div class="info">
                             <h5>{{ user.firstName }} {{ user.lastName }}</h5>

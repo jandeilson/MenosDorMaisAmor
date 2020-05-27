@@ -16,5 +16,22 @@
     .slogan {
         font-size: 1.3rem;
     }
+
+
+    @media only screen and (max-width: $breakpoint-mobile) {
+        h1 {
+            &.logo {
+                height: auto;
+                width: auto;
+            }
+        }
+
+        .slogan {
+            font-size: 1.1rem;
+        }
+    }
     
 }
+
+
+

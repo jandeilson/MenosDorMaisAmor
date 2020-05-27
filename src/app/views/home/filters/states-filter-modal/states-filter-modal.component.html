@@ -1,4 +1,12 @@
-<div class="text-center">
-    <button type="button" class="btn btn-outline-modal" (click)="passBack($event)" style="width: 100%">Todos os estados</button>
-    <button *ngFor="let state of data" type="button" class="btn btn-outline-modal" (click)="passBack($event)" [attr.state-id]="state._id">{{ state.name }}</button>
+<ng-template #allStates>
+    <div class="text-center">
+        <button type="button" class="btn btn-outline-modal" (click)="passBack($event)" style="width: 100%">Todos os estados</button>
+        <button *ngFor="let state of data" type="button" class="btn btn-outline-modal" (click)="passBack($event)" [attr.state-id]="state._id">{{ state.name }}</button>
+    </div>
+</ng-template>
+
+<div *ngIf="loading; else allStates"class="text-center">
+    <div class="loading-states spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
 </div>

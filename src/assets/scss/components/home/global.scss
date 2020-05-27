@@ -8,8 +8,6 @@
     
 
     .cta {
-        padding: 3rem 0;
-
         .btn {
             border-radius: 100px;
             font-weight: bold;
@@ -49,17 +47,25 @@
         box-sizing: border-box;
         border-radius: 100px;
         padding: 4px 2px;
-        width: 320px;
         margin: 0 auto 60px auto;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none; 
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
 
         .list-group-item {
             background: transparent;
             border: none;
             border-radius: 100px;
             cursor: pointer;
-            margin: 0 2px;
+            margin: auto;
         
-
             a {
                 color: black;
                 &:hover {
@@ -75,17 +81,32 @@
         }
     }
     
+    
     .help-needy {
-        background: linear-gradient(6.84deg, rgba(0, 0, 0, 0.6) 2%, rgba(255, 255, 255, 0) 162.80%), linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(assets/images/bg-home-cta-needy.jpg);
-        background-repeat: no-repeat;
-        background-position: 50% 85%;
-        background-size: 160%;
+        background: black;
         border-radius: 7px;
         color: $white;
-        padding: 10% 5%;
+        padding: 10%;
         margin-bottom: -125px;
         position: relative;
         box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.13);
+        z-index: 1;
+
+        .bg {
+            background:  url(assets/images/bg-home-cta-needy.jpg);
+            background-repeat: no-repeat;
+            background-position: 50% 85%;
+            background-size: 160%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: -1;
+            opacity: 0.2;
+            border-radius: 7px;
+            filter: blur(2px);
+        }
     }
 
     .testimonials {
@@ -110,7 +131,7 @@
         .filterByText {
             font-size: 0.8rem;
             text-align: center;
-            margin: 10px 0;
+            margin: 60px 0 10px 0;
             text-transform: uppercase;
             color: #686868;  
         }
@@ -175,16 +196,18 @@
             }
 
         }
+    }
 
-        
-        // mobile
-        &.mClickEffect {
-            transform: scale(1.02);
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.29);
-            -webkit-transition: $transition;
-            -moz-transition: $transition;
-            -o-transition: $transition;
-            transition: $transition;
+
+    @media only screen and (min-width: $breakpoint-mobile) {
+   
+    }
+    
+    @media only screen and (max-width: $breakpoint-mobile) {
+        .list-filter {
+            .list-group-item {
+                padding: 10px;
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -6,9 +6,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './states-filter-modal.component.html',
   styleUrls: ['../../../../../assets/scss/components/home/modal.scss']
 })
-export class StatesFilterModalComponent implements OnInit {
+export class StatesFilterModalComponent {
 
-  @Input() public data: any;
+  @Input() data: any;
+  @Input() loading: boolean;
+
 
   passBack(event: any){
     //const stateId = event.target.getAttribute('state-id');
@@ -17,9 +19,5 @@ export class StatesFilterModalComponent implements OnInit {
   }
   
   constructor(public activeModal: NgbActiveModal) { }
-
-  ngOnInit(): void {
-    //console.log(this.data)
-  }
 
 }

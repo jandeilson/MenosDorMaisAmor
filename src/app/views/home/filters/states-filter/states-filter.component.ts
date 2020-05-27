@@ -11,7 +11,6 @@ export class StatesFilter {
   public loading: boolean = true;
   public states: any[];
 
- 
   constructor(private apollo: Apollo) {}
   
   getStates() {
