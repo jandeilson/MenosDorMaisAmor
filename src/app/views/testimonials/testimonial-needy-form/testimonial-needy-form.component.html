@@ -1,136 +1,262 @@
 <div class="needy-form">
-    <form [formGroup]="form" #f="ngForm" (ngSubmit)="submit(f)" class="form">
-    
-        <div formGroupName="testimonial">
-            <div class="step" [ngClass]="formStep ? '' : 'currentStep'">
-                <h4>Compartilhe seu depoimento!</h4>
-                <h6>Seja ele um sentimento de amor ou uma sensação de dor.</h6>
-                <div class="form-group">
-                    <textarea 
-                        formControlName="textTestimonial" name="textTestimonial" 
-                        id="textTestimonial" cols="30" rows="10" placeholder="Escreva seu depoimento" class="form-control"></textarea>
-                    
-                    <div *ngIf="fieldValidation.testimonial.touched && fieldValidation.testimonial.invalid" class="alert alert-danger">
-                        <div *ngIf="fieldValidation.testimonial.errors.required">Precisamos do seu depoimento.</div>
-                    </div>
-                </div>
+  <form [formGroup]="form" #f="ngForm" (ngSubmit)="submit(f)" class="form">
+    <div formGroupName="testimonial">
+      <div class="step" [ngClass]="formStep ? '' : 'currentStep'">
+        <h4>Compartilhe seu depoimento!</h4>
+        <h6>Seja ele um sentimento de amor ou uma sensação de dor.</h6>
+        <div class="form-group">
+          <textarea
+            formControlName="textTestimonial"
+            name="textTestimonial"
+            id="textTestimonial"
+            cols="30"
+            rows="10"
+            placeholder="Escreva seu depoimento"
+            class="form-control"
+          ></textarea>
 
-                <h4>Acrescente fotos!</h4>
-                <h6>Fotos podem enriquecer seu depoimento.</h6>
-                <div class="form-group">
-                    <div class="custom-file">
-                        <input 
-                            class="custom-file-input" formArrayName="mediaPhotos" name="mediaPhotos"  class="custom-file-input"
-                            type="file" id="mediaPhotos" (change)="uploadFiles($event)" accept="image/*" lang="pt" multiple>
-                        <label class="custom-file-label" for="validatedCustomFile">
-                            <div *ngIf="form.value.testimonial.mediaPhotos.length > 0; else labelFile">
-                                {{form.value.testimonial.mediaPhotos.length}} fotos...
-                            </div>
-                            <ng-template #labelFile>
-                                Escolha...
-                            </ng-template>
-                        </label>
-
-                        <div *ngIf="fileUploadProgress" class="text-center">Progresso do upload: {{ fileUploadProgress }}%</div>
-                        <div *ngIf="fileUploadProgress == 100" class="text-center">Upload concluído!</div>
-                    </div>
-                </div>
-
-                <h4>Seu depoimento é:</h4>
-                <div class="form-group ">
-                    <select formControlName="category" name="category" id="category" class="custom-select">
-                        <option value="love" selected>um sentimento de Amor</option>
-                        <option value="pain">uma sensação de Dor</option>
-                    </select>
-                </div>
-
-                <h4>Você precisa de ajuda?</h4>
-                <h6>Em caso positivo, as pessoas que lerem seu depoimento poderão te ajudar.</h6>
-                <div class="form-group text-center">
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" type="radio" formControlName="help" name="help" id="help-yes" [value]=true>
-                        <label class="custom-control-label" for="help-yes">Sim</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input class="custom-control-input" type="radio" formControlName="help" name="help" id="help-no" [value]=false>
-                        <label class="custom-control-label" for="help-no">Não</label>
-                    </div>
-                </div>
+          <div
+            *ngIf="
+              fieldValidation.testimonial.touched &&
+              fieldValidation.testimonial.invalid
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="fieldValidation.testimonial.errors.required">
+              Precisamos do seu depoimento.
             </div>
+          </div>
         </div>
 
-        <div class="step" [ngClass]="formStep ? 'currentStep' : ''">
-            <div formGroupName="user">
-                <h4>Então... quem é você?</h4>
-                <h6>Precisamos de algumas informações básicas sobre você.</h6>
-                <div class="form-group">
-                    <input 
-                        formControlName="firstName" name="firstName" 
-                        id="firstName" type="text" placeholder="Nome" class="form-control">
-                
-                    <div *ngIf="fieldValidation.firstName.touched && fieldValidation.firstName.invalid" class="alert alert-danger">
-                        <div *ngIf="fieldValidation.firstName.errors.required">Precisamos do seu primeiro nome.</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input 
-                        formControlName="lastName" name="lastName"
-                        id ="lastName" type="text" placeholder="Sobrenome" class="form-control">
+        <h4>Acrescente fotos!</h4>
+        <h6>Fotos podem enriquecer seu depoimento.</h6>
+        <div class="form-group">
+          <div class="custom-file">
+            <input
+              class="custom-file-input"
+              formArrayName="mediaPhotos"
+              name="mediaPhotos"
+              class="custom-file-input"
+              type="file"
+              id="mediaPhotos"
+              (change)="uploadFiles($event)"
+              accept="image/*"
+              lang="pt"
+              multiple
+            />
+            <label class="custom-file-label" for="validatedCustomFile">
+              <div
+                *ngIf="
+                  form.value.testimonial.mediaPhotos.length > 0;
+                  else labelFile
+                "
+              >
+                {{ form.value.testimonial.mediaPhotos.length }} fotos...
+              </div>
+              <ng-template #labelFile>
+                Escolha...
+              </ng-template>
+            </label>
 
-                    <div *ngIf="fieldValidation.lastName.touched && fieldValidation.lastName.invalid" class="alert alert-danger">
-                        <div *ngIf="fieldValidation.lastName.errors.required">Precisamos do seu segundo nome.</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input 
-                        formControlName="email" name="email"
-                        id ="email" type="email" placeholder="E-mail" class="form-control">
-
-                    <div *ngIf="fieldValidation.email.touched && fieldValidation.email.invalid" class="alert alert-danger">
-                        <div *ngIf="fieldValidation.email.errors.required">Precisamos do seu e-mail.</div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input 
-                        formControlName="phone" name="phone"
-                        id="phone" type="number" placeholder="Telefone" class="form-control">
-                    
-                    <div *ngIf="fieldValidation.phone.touched && fieldValidation.phone.invalid" class="alert alert-danger">
-                        <div *ngIf="fieldValidation.phone.errors.required">Precisamos do seu telefone.</div>
-                    </div>
-                </div>
+            <div *ngIf="fileUploadProgress" class="text-center">
+              Progresso do upload: {{ fileUploadProgress }}%
             </div>
-
-            <div formGroupName="testimonial">
-                <div class="form-group">
-                    <select 
-                        formControlName="state" name="state"
-                        class="custom-select" id="state" (change)="citiesState($event)">
-                        <option value="" disabled selected>Estado</option>
-                        <option *ngFor="let state of states | async" [value]="state.name" [attr.state-id]="state._id">{{ state.name }}</option>
-                    </select>
-                </div>
-                
-                <div *ngIf="loading" class="loading">
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span>Carregando cidades...</span>
-                </div>
-
-                <div *ngIf="cities && !loading" class="form-group">
-                    <select 
-                        formControlName="city" name="city"
-                        class="custom-select" id="city">
-                        <option value="" disabled selected>Cidade</option>
-                        <option *ngFor="let city of cities" [value]="city.name">{{ city.name }}</option>
-                    </select>
-                </div>
-
+            <div *ngIf="fileUploadProgress == 100" class="text-center">
+              Upload concluído!
             </div>
-
-            <button class="btn btn-default" [disabled]="!form.valid">Enviar</button>
-
-            <small>Leia nossa <a href="#">política de privacidade</a> para saber como cuidamos dos seus dados pessoais.</small>
+          </div>
         </div>
 
-    </form>
-    <button class="btn btn-default" (click)="formSteps()">{{ formStepText }}</button>
+        <h4>Seu depoimento é:</h4>
+        <div class="form-group">
+          <select
+            formControlName="category"
+            name="category"
+            id="category"
+            class="custom-select"
+          >
+            <option value="love" selected>um sentimento de Amor</option>
+            <option value="pain">uma sensação de Dor</option>
+          </select>
+        </div>
+
+        <h4>Você precisa de ajuda?</h4>
+        <h6>
+          Em caso positivo, as pessoas que lerem seu depoimento poderão te
+          ajudar.
+        </h6>
+        <div class="form-group text-center">
+          <div class="custom-control custom-radio custom-control-inline">
+            <input
+              class="custom-control-input"
+              type="radio"
+              formControlName="help"
+              name="help"
+              id="help-yes"
+              [value]="true"
+            />
+            <label class="custom-control-label" for="help-yes">Sim</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input
+              class="custom-control-input"
+              type="radio"
+              formControlName="help"
+              name="help"
+              id="help-no"
+              [value]="false"
+            />
+            <label class="custom-control-label" for="help-no">Não</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step" [ngClass]="formStep ? 'currentStep' : ''">
+      <div formGroupName="user">
+        <h4>Então... quem é você?</h4>
+        <h6>Precisamos de algumas informações básicas sobre você.</h6>
+        <div class="form-group">
+          <input
+            formControlName="firstName"
+            name="firstName"
+            id="firstName"
+            type="text"
+            placeholder="Nome"
+            class="form-control"
+          />
+
+          <div
+            *ngIf="
+              fieldValidation.firstName.touched &&
+              fieldValidation.firstName.invalid
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="fieldValidation.firstName.errors.required">
+              Precisamos do seu primeiro nome.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="lastName"
+            name="lastName"
+            id="lastName"
+            type="text"
+            placeholder="Sobrenome"
+            class="form-control"
+          />
+
+          <div
+            *ngIf="
+              fieldValidation.lastName.touched &&
+              fieldValidation.lastName.invalid
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="fieldValidation.lastName.errors.required">
+              Precisamos do seu segundo nome.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="email"
+            name="email"
+            id="email"
+            type="email"
+            placeholder="E-mail"
+            class="form-control"
+          />
+
+          <div
+            *ngIf="
+              fieldValidation.email.touched && fieldValidation.email.invalid
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="fieldValidation.email.errors.required">
+              Precisamos do seu e-mail.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            formControlName="phone"
+            name="phone"
+            id="phone"
+            type="number"
+            placeholder="Telefone"
+            class="form-control"
+          />
+          <!-- (ngModelChange)="getPhone($event)" / [value]="phoneMask | phone:'BR'" -->
+
+          <div
+            *ngIf="
+              fieldValidation.phone.touched && fieldValidation.phone.invalid
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="fieldValidation.phone.errors.required">
+              Precisamos do seu telefone.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div formGroupName="testimonial">
+        <div class="form-group">
+          <select
+            formControlName="state"
+            name="state"
+            class="custom-select"
+            id="state"
+            (change)="citiesState($event)"
+          >
+            <option value="" disabled selected>Estado</option>
+            <option
+              *ngFor="let state of states | async"
+              [value]="state.name"
+              [attr.state-id]="state._id"
+              >{{ state.name }}</option
+            >
+          </select>
+        </div>
+
+        <div *ngIf="loading" class="loading">
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span
+          ><span>Carregando cidades...</span>
+        </div>
+
+        <div *ngIf="cities && !loading" class="form-group">
+          <select
+            formControlName="city"
+            name="city"
+            class="custom-select"
+            id="city"
+          >
+            <option value="" disabled selected>Cidade</option>
+            <option *ngFor="let city of cities" [value]="city.name">{{
+              city.name
+            }}</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn btn-default" [disabled]="!form.valid">Enviar</button>
+
+      <small
+        >Leia nossa <a href="#">política de privacidade</a> para saber como
+        cuidamos dos seus dados pessoais.</small
+      >
+    </div>
+  </form>
+  <button class="btn btn-default" (click)="formSteps()">
+    {{ formStepText }}
+  </button>
 </div>

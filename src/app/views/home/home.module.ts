@@ -16,7 +16,7 @@ import { StatesFilter } from './filters/states-filter/states-filter.component';
 import { DateFilterModalComponent } from './filters/date-filter-modal/date-filter-modal.component';
 import { DateModalComponent } from './modals/date-modal/date-modal.component';
 
-import { InterestsGQL } from '../../graphql/interests'
+import { InterestsGQL } from '../../graphql/interests';
 import { InterestedButtonComponent } from '../../shared/interestedButton/interested-button.component';
 
 @NgModule({

@@ -1,60 +1,92 @@
-<div class="helper-form">
-    <form #f="ngForm" (ngSubmit)="submit(f)" class="form">
-        <h4>Antes de continuar...</h4>
-        <h6>Precisamos das seguintes informações sobre você:</h6>
-        <div class="form-group">
-            <input 
-                ngModel
-                required 
-                name="firstName" 
-                #firstName="ngModel"
-                id="firstName" type="text" placeholder="Nome" class="form-control">
-            
-                <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
-                <div *ngIf="firstName.errors.required">Precisamos do seu nome.</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <input 
-                ngModel
-                required 
-                name="lastName" 
-                #lastName="ngModel"
-                id="lastName" type="text" placeholder="Sobrenome" class="form-control">
-            
-                <div class="alert alert-danger" *ngIf="lastName.touched && !lastName.valid">
-                <div *ngIf="lastName.errors.required">Precisamos do seu sobrenome.</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <input 
-                ngModel
-                required 
-                name="email" 
-                #email="ngModel"
-                id="email" type="text" placeholder="E-mail" class="form-control">
-            
-                <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
-                <div *ngIf="email.errors.required">Precisamos do seu e-mail.</div>
-                <div *ngIf="email.errors.email">Precisamos de um e-mail válido.</div>
-            </div>
-        </div>
-        <div class="form-group">
-            <input 
-                ngModel
-                required 
-                name="phone" 
-                #phone="ngModel"
-                id="phone" type="number" placeholder="Telefone" class="form-control">
-            
-                <div class="alert alert-danger" *ngIf="phone.touched && !phone.valid">
-                <div *ngIf="phone.errors.required">Precisamos do seu telefone.</div>
-            </div>
-        </div>
-        
-        <button class="btn btn-default" [disabled]="!f.valid">Ajudar!</button>
+<div *ngIf="needyRequest == false" class="helper-form">
+  <form #f="ngForm" (ngSubmit)="submit(f)" class="form">
+    <h4>Antes de continuar...</h4>
+    <h6>Precisamos das seguintes informações sobre você:</h6>
+    <div class="form-group">
+      <input
+        ngModel
+        required
+        name="firstName"
+        #firstName="ngModel"
+        id="firstName"
+        type="text"
+        placeholder="Nome"
+        class="form-control"
+      />
 
-        <small>Leia nossa <a href="#">política de privacidade</a> para saber como cuidamos dos seus dados pessoais.</small>
+      <div
+        class="alert alert-danger"
+        *ngIf="firstName.touched && !firstName.valid"
+      >
+        <div *ngIf="firstName.errors.required">Precisamos do seu nome.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        ngModel
+        required
+        name="lastName"
+        #lastName="ngModel"
+        id="lastName"
+        type="text"
+        placeholder="Sobrenome"
+        class="form-control"
+      />
 
-    </form>
+      <div
+        class="alert alert-danger"
+        *ngIf="lastName.touched && !lastName.valid"
+      >
+        <div *ngIf="lastName.errors.required">Precisamos do seu sobrenome.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        ngModel
+        required
+        name="email"
+        #email="ngModel"
+        id="email"
+        type="text"
+        placeholder="E-mail"
+        class="form-control"
+      />
+
+      <div class="alert alert-danger" *ngIf="email.touched && !email.valid">
+        <div *ngIf="email.errors.required">Precisamos do seu e-mail.</div>
+        <div *ngIf="email.errors.email">Precisamos de um e-mail válido.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        ngModel
+        required
+        name="phone"
+        #phone="ngModel"
+        id="phone"
+        type="number"
+        placeholder="Telefone"
+        class="form-control"
+      />
+
+      <div class="alert alert-danger" *ngIf="phone.touched && !phone.valid">
+        <div *ngIf="phone.errors.required">Precisamos do seu telefone.</div>
+      </div>
+    </div>
+
+    <button class="btn btn-default" [disabled]="!f.valid">Ajudar!</button>
+
+    <small
+      >Leia nossa <a href="#">política de privacidade</a> para saber como
+      cuidamos dos seus dados pessoais.</small
+    >
+  </form>
+</div>
+
+<div *ngIf="needyRequest == true" class="needy-contact">
+  <h4>Você está ajudando...</h4>
+  <h5>{{ needyContact.firstName }} {{ needyContact.lastName }}</h5>
+  <hr />
+  <h6>{{ needyContact.email }}</h6>
+  <h6>{{ needyContact.phone | phone: "BR" }}</h6>
 </div>

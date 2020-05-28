@@ -7,13 +7,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { TestimonialsComponent } from './testimonials.component';
 import { TestimonialDetailComponent } from './testimonial-detail/testimonial-detail.component';
 import { TestimonialNeedyFormComponent } from './testimonial-needy-form/testimonial-needy-form.component';
-import { TestimonialHelperFormComponent } from './testimonial-helper-form/testimonial-helper-form.component'
+import { TestimonialHelperFormComponent } from './testimonial-helper-form/testimonial-helper-form.component';
 import { CommonButtonComponent } from '../../shared/commonButton/common-button.component';
 
-import { TestimonialGQL, UserGQL} from '../../graphql/testimonial-form';
+import { TestimonialGQL } from '../../graphql/testimonial-form';
+import { UserGQLQuery, UserGQLMutation } from './../../graphql/users';
 import { BrazilianStatesGQL } from '../../graphql/states';
 import { DefaultPageComponent } from '../../shared/default-page/default-page.component';
 
+import { PhonePipe } from './../../pipes/phone.pipe';
 
 @NgModule({
   declarations: [
@@ -22,19 +24,21 @@ import { DefaultPageComponent } from '../../shared/default-page/default-page.com
     TestimonialNeedyFormComponent,
     TestimonialHelperFormComponent,
     CommonButtonComponent,
-    DefaultPageComponent
+    DefaultPageComponent,
+    PhonePipe
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     BrazilianStatesGQL,
     TestimonialGQL,
-    UserGQL
-  ]
+    UserGQLQuery,
+    UserGQLMutation,
+  ],
 })
 export class TestimonialsModule {}

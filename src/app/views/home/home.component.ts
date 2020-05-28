@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from "apollo-angular";
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { queryUsersAndTestimonails } from '../../graphql/home'
-import { NgbModal, NgbActiveModal, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { StatesModalComponent } from './modals/states-modal/states-modal.component';
 import { StatesFilter } from './filters/states-filter/states-filter.component';
 import { DateModalComponent } from './modals/date-modal/date-modal.component';
