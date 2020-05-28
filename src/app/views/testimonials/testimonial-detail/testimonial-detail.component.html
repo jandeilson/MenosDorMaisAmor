@@ -1,5 +1,5 @@
 <ng-template #detail>
-  <div class="testimonial-detail">
+  <article class="testimonial-detail">
     <div class="badge-testimonial {{ testimonial.category }}"></div>
 
     <h5>{{ testimonial.firstName }} {{ testimonial.lastName }}</h5>
@@ -16,7 +16,7 @@
         (click)="goHelp()"
       ></common-button>
     </div>
-  </div>
+  </article>
 </ng-template>
 
 <div *ngIf="loading; else detail" class="loadingSomething"></div>

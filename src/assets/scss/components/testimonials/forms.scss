@@ -14,7 +14,12 @@
     }
 
     .btn-default {
-        margin: 20px 0;
+        margin-top: 1rem;
+    }
+
+    .alert {
+        font-size: 0.8rem;
+        padding: 0.50rem;
     }
     
     input[type=number] {
@@ -31,6 +36,7 @@
     h6 {
         text-align: center;
         font-size: 0.8rem;
+        margin-bottom: 1rem;
     }
 
 
@@ -57,12 +63,19 @@
     }
     h6 {
         text-align: center;
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
     }
 
     input[type=number] {
         -moz-appearance:textfield; 
         -webkit-appearance:textfield; 
         appearance:textfield; 
+    }
+
+    .alert {
+        font-size: 0.8rem;
+        padding: 0.50rem;
     }
 }
 
@@ -91,4 +104,9 @@
         font-size: 0.8rem;
         color: #545454;
     }
+}
+
+.privacy-comment {
+    margin-top: 1rem;
+    display: block;
 }
