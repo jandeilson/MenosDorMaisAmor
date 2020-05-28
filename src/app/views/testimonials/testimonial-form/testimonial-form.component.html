@@ -1,4 +1,4 @@
-<div class="needy-form">
+<section class="testimonial-form">
   <form [formGroup]="form" #f="ngForm" (ngSubmit)="submit(f)" class="form">
     <div formGroupName="testimonial">
       <div class="step" [ngClass]="formStep ? '' : 'currentStep'">
@@ -259,4 +259,4 @@
   <button class="btn btn-default" (click)="formSteps()">
     {{ formStepText }}
   </button>
-</div>
+</section>

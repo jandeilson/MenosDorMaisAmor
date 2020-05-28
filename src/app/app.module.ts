@@ -7,7 +7,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TestimonialsModule } from './views/testimonials/testimonials.module';
 import { HomeModule } from './views/home/home.module';
 import { LayoutModule } from './layout/layout.module';
-
 import { GraphQLModule } from './graphql.module';
 
 import { AppComponent } from './app.component';

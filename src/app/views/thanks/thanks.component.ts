@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'thanks',
+  selector: "thanks",
   template: `
-  OBRIGADO!!!
-  `
+    <article class="text-center">
+      <h4><strong>Obrigado!</strong></h4>
+      <p>Ficamos muito felizes em receber a sua contribuição.</p>
+      <p></p>
+    </article>
+  `,
 })
-export class ThanksComponent{
-
-  constructor() { }
+export class ThanksComponent {
+  constructor() {}
 }

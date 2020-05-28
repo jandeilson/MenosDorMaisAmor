@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { TestimonialsComponent } from './testimonials.component';
 import { TestimonialDetailComponent } from './testimonial-detail/testimonial-detail.component';
-import { TestimonialNeedyFormComponent } from './testimonial-needy-form/testimonial-needy-form.component';
+import { TestimonialFormComponent } from './testimonial-form/testimonial-form.component';
 import { TestimonialHelperFormComponent } from './testimonial-helper-form/testimonial-helper-form.component';
 import { CommonButtonComponent } from '../../shared/commonButton/common-button.component';
 
@@ -21,7 +21,7 @@ import { PhonePipe } from './../../pipes/phone.pipe';
   declarations: [
     TestimonialsComponent,
     TestimonialDetailComponent,
-    TestimonialNeedyFormComponent,
+    TestimonialFormComponent,
     TestimonialHelperFormComponent,
     CommonButtonComponent,
     DefaultPageComponent,

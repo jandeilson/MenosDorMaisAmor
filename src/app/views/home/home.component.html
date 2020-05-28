@@ -1,83 +1,129 @@
 <ng-template #home>
-<section id="home">
+  <section id="home">
     <div class="carousel">
-        <div class="container default">
-            <owl-carousel-o [options]="customOptions" class="testimonials-carousel">
-                <ng-container *ngFor="let user of usersCarousel">
-                    <ng-template carouselSlide [id]="user.id">
-                        <div class="carousel-block" [routerLink]="['/testimonial', user.testimonial._id]">
-                            <div class="content">
-                                <div class="user-testimonial">
-                                    <p>
-                                        {{ user.testimonial.text | summary:200 }}
-                                    </p>
-                                </div>
-                                <div class="user-info">
-                                    <h5 class="font-weight-bold">{{ user.firstName }}</h5>
-                                    <h6>{{ user.testimonial.state }}</h6>
+      <div class="container default">
+        <owl-carousel-o [options]="customOptions" class="testimonials-carousel">
+          <ng-container *ngFor="let user of usersCarousel">
+            <ng-template carouselSlide [id]="user.id">
+              <div
+                class="carousel-block"
+                [routerLink]="['/testimonial', user.testimonial._id]"
+              >
+                <div class="content">
+                  <div class="user-testimonial">
+                    <p>
+                      {{ user.testimonial.text | summary: 200 }}
+                    </p>
+                  </div>
+                  <div class="user-info">
+                    <h5 class="font-weight-bold">{{ user.firstName }}</h5>
+                    <h6>{{ user.testimonial.state }}</h6>
 
-                                    <div class="badge-testimonial carousel" [ngClass]="user.testimonial.category"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </ng-template>
-                </ng-container>
-            </owl-carousel-o>
-        </div>
+                    <div
+                      class="badge-testimonial carousel"
+                      [ngClass]="user.testimonial.category"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ng-container>
+        </owl-carousel-o>
+      </div>
     </div>
 
     <div class="cta">
-        <div class="container default">
-            <div class="help-needy text-center">
-                <p>Compartilhe um sentimento de <strong>amor</strong> ou uma sensação de <strong>dor</strong>!</p>
-                <p>Estamos todos juntos compartilhando sentimentos e sensações para tocar uns aos outros.</p>
-                <button routerLink="/testimonial/create" class="btn btn-light">Compartilhar!</button>
+      <div class="container default">
+        <div class="help-needy text-center">
+          <p>
+            Compartilhe um sentimento de <strong>amor</strong> ou uma sensação
+            de <strong>dor</strong>!
+          </p>
+          <p>
+            Estamos todos juntos compartilhando sentimentos e sensações para
+            tocar uns aos outros.
+          </p>
+          <button routerLink="/testimonial/create" class="btn btn-light">
+            Compartilhar!
+          </button>
 
-                <div class="bg"></div>
-            </div>
+          <div class="bg"></div>
         </div>
+      </div>
     </div>
 
     <div class="testimonials" #testimonials>
-        <div class="container default">
-            <div class="filterByText">Filtrar por:</div>
-            <ul class="list-filter list-group list-group-horizontal" >
-                <li class="list-group-item" [ngClass]="{'active': filterActive === 'Data' }" (click)="filterByDate($event, testimonials)">Data</li>
-                <li class="list-group-item" [ngClass]="{'active': filterActive === 'Mais vistos' }" (click)="filterByInterests($event)">Mais vistos</li>
-                <li class="list-group-item" [ngClass]="{'active': filterActive === 'Estado' }" (click)="filterByStates($event, testimonials)">Estado</li>
-            </ul>
+      <div class="container default">
+        <div class="filterByText">Filtrar por:</div>
+        <ul class="list-filter list-group list-group-horizontal">
+          <li
+            class="list-group-item f-date"
+            [ngClass]="{ active: filterActive === 'f-date' }"
+            (click)="filterByDate($event, testimonials)"
+          >
+            Data
+          </li>
+          <li
+            class="list-group-item f-most-interested"
+            [ngClass]="{ active: filterActive === 'f-most-interested' }"
+            (click)="filterByInterests($event)"
+          >
+            Mais vistos
+          </li>
+          <li
+            class="list-group-item f-states"
+            [ngClass]="{ active: filterActive === 'f-states' }"
+            (click)="filterByStates($event, testimonials)"
+          >
+            Estado
+          </li>
+        </ul>
+        <div>
+          <div
+            *ngFor="let user of users; let i = index"
+            [ngClass]="{ active: testimonialEvent === i }"
+            (click)="goToTestimonial(i)"
+            class="testimonial-archive"
+          >
             <div>
-                <div 
-                    *ngFor="let user of users; let i=index" 
-                    [ngClass]="{'active': testimonialEvent === i }" 
-                    (click)="goToTestimonial(i)"
-                    class="testimonial-archive">
-                    <div>
-                        <div class="info">
-                            <h5>{{ user.firstName }} {{ user.lastName }}</h5>
-                            <div class="badge-testimonial" [ngClass]="user.testimonial.category"></div>
-                        </div>
-                        <div class="text">
-                            <p>{{ user.testimonial.text }}</p>
-                            <div class="row">
-                                <div class="col">
-                                    <h6>{{ user.testimonial.city }}<br>
-                                        {{ user.testimonial.state }}
-                                    </h6>
-                                </div>
-                                <div class="col">
-                                    <interested-button *ngIf="user.testimonial.category === 'love'" [testimonialId]="user.testimonial._id" [count]="user.testimonial.interests" title="Sinta amor"></interested-button>
-                                    <interested-button *ngIf="user.testimonial.category === 'pain'" [testimonialId]="user.testimonial._id" [count]="user.testimonial.interests" title="Doe amor"></interested-button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> 
+              <div class="info">
+                <h5>{{ user.firstName }} {{ user.lastName }}</h5>
+                <div
+                  class="badge-testimonial"
+                  [ngClass]="user.testimonial.category"
+                ></div>
+              </div>
+              <div class="text">
+                <p>{{ user.testimonial.text }}</p>
+                <div class="row">
+                  <div class="col">
+                    <h6>
+                      {{ user.testimonial.city }}<br />
+                      {{ user.testimonial.state }}
+                    </h6>
+                  </div>
+                  <div class="col">
+                    <interested-button
+                      *ngIf="user.testimonial.category === 'love'"
+                      [testimonialId]="user.testimonial._id"
+                      [count]="user.testimonial.interests"
+                      title="Sinta amor"
+                    ></interested-button>
+                    <interested-button
+                      *ngIf="user.testimonial.category === 'pain'"
+                      [testimonialId]="user.testimonial._id"
+                      [count]="user.testimonial.interests"
+                      title="Doe amor"
+                    ></interested-button>
+                  </div>
+                </div>
+              </div>
             </div>
-            
+          </div>
         </div>
+      </div>
     </div>
-</section>
+  </section>
 </ng-template>
 
 <div *ngIf="loading; else home" class="loadingSomething"></div>

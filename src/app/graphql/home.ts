@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
-export const queryUsersAndTestimonails = gql` 
-query {
+export const queryUsersAndTestimonails = gql`
+  query {
     userMany {
       _id
       firstName
@@ -23,11 +23,11 @@ query {
 `;
 
 export const queryStates = gql`
-query {
-  stateMany {
-    _id
-    initials
-    name
+  query {
+    stateMany {
+      _id
+      initials
+      name
+    }
   }
-}
 `;

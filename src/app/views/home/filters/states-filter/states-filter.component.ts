@@ -4,7 +4,7 @@ import { queryStates } from '../../../../graphql/home'
 
 @Component({
   selector: 'states-filter',
-  templateUrl: './states-filter.component.html'
+  template: ''
 })
 export class StatesFilter {
 

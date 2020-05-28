@@ -12,12 +12,13 @@ import { ModalComponent } from '../../shared/modal-component/modal.component';
 import { HomeComponent } from './home.component';
 import { StatesFilterModalComponent } from './filters/states-filter-modal/states-filter-modal.component';
 import { StatesModalComponent } from './modals/states-modal/states-modal.component';
-import { StatesFilter } from './filters/states-filter/states-filter.component';
 import { DateFilterModalComponent } from './filters/date-filter-modal/date-filter-modal.component';
 import { DateModalComponent } from './modals/date-modal/date-modal.component';
+import { InterestedButtonComponent } from '../../shared/interestedButton/interested-button.component';
 
 import { InterestsGQL } from '../../graphql/interests';
-import { InterestedButtonComponent } from '../../shared/interestedButton/interested-button.component';
+import { StatesFilter } from './filters/states-filter/states-filter.component';
+import { FiltersHome } from './filters/filters-home/filters-home.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { InterestedButtonComponent } from '../../shared/interestedButton/interes
     DateFilterModalComponent,
     DateModalComponent,
     StatesFilter,
-    InterestedButtonComponent
+    InterestedButtonComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -41,6 +43,7 @@ import { InterestedButtonComponent } from '../../shared/interestedButton/interes
   ],
   providers: [
     NgbActiveModal,
+    FiltersHome,
     StatesFilter,
     InterestsGQL
   ],

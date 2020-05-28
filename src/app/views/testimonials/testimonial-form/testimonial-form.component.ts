@@ -7,13 +7,13 @@ import { BrazilianCitiesGQL, Cities } from "../../../graphql/cities";
 import { TestimonialGQL } from "src/app/graphql/testimonial-form";
 import { HttpClient, HttpEventType } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { UserGQLMutation } from "./../../../graphql/users";
+import { UserGQLMutation } from "../../../graphql/users";
 
 @Component({
-  selector: "testimonial-needy-form",
-  templateUrl: "./testimonial-needy-form.component.html",
+  selector: "testimonial-form",
+  templateUrl: "./testimonial-form.component.html",
 })
-export class TestimonialNeedyFormComponent {
+export class TestimonialFormComponent {
   loading: boolean = false;
   formStep: boolean = false;
   formStepText: string = "Prosseguir";

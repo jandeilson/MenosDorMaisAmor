@@ -1,65 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { Apollo } from "apollo-angular";
+import { Apollo } from 'apollo-angular';
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { queryUsersAndTestimonails } from '../../graphql/home'
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { StatesModalComponent } from './modals/states-modal/states-modal.component';
-import { StatesFilter } from './filters/states-filter/states-filter.component';
-import { DateModalComponent } from './modals/date-modal/date-modal.component';
+import { queryUsersAndTestimonails } from '../../graphql/home';
+import { FiltersHome } from './filters/filters-home/filters-home.component';
 
 @Component({
   selector: 'home',
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit {
-  
   users: any[];
   usersCarousel: any[];
   queryUsers: any[];
   loading: boolean = true;
   testimonialsCarousel: any;
   testimonialEvent: any;
-  filterActive: any = 'Mais vistos';
+  filterActive: string = 'f-most-interested';
 
-  constructor(private apollo: Apollo, private modalService: NgbModal, private StatesFilter: StatesFilter) {}
+  constructor(private apollo: Apollo, private filtersHome: FiltersHome) {}
 
-  filterByStates(event: any, testimonials: any) {
-    this.filterActive = event.target.textContent;
-    this.StatesFilter.getStates();
-    
-    const modalRef = this.modalService.open(StatesModalComponent, { centered: true });
-    modalRef.componentInstance.data = this.StatesFilter;
-
-    modalRef.result.then((stateName) => {
-      if (stateName === 'Todos os estados') {
-        this.users = this.queryUsers;
-      } else {
-        const result = this.queryUsers.filter((result) => result.testimonial.state === stateName);
-        this.users = result;
-      }
-
-      testimonials.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
-    });
+  filterByStates(e: { target: { classList: string[] } }, testimonials: any) {
+    this.filtersHome
+      .states(e, testimonials)
+      .then(({ active, filtered }: { active: string; filtered: any[] }) => {
+        this.filterActive = active;
+        this.users = filtered;
+      });
   }
 
-  filterByDate(event: any, testimonials: any) {
-    this.filterActive = event.target.textContent;
-    const modalRef = this.modalService.open(DateModalComponent, { centered: true });
-
-    modalRef.result.then((date: string) => {
-      const toDate = (date: string) => new Date(date).getDate();
-      const result = this.queryUsers.filter((result) => toDate(result.testimonial.createdAt) === toDate(date.replace(/-/g, '/')));
-      this.users = result;
-      
-      testimonials.scrollIntoView({behavior: 'smooth', block: 'end', inline: 'nearest'});
-    });
+  filterByDate(e: { target: { classList: string[] } }, testimonials: any) {
+    this.filtersHome
+      .date(e, testimonials)
+      .then(({ active, filtered }: { active: string; filtered: any[] }) => {
+        this.filterActive = active;
+        this.users = filtered;
+      });
   }
 
-  filterByInterests(event: any) {
-    this.filterActive = event.target.textContent;
-    const usersFiltered = this.queryUsers.sort((a, b) => b.testimonial.interests - a.testimonial.interests);
-
-    this.users = usersFiltered;
+  filterByInterests(e: { target: { classList: string[] } }) {
+    this.filtersHome
+      .interests(e)
+      .then(({ active, filtered }: { active: string; filtered: any[] }) => {
+        this.filterActive = active;
+        this.users = filtered;
+      });
   }
 
   // Owl Carousel options
@@ -73,65 +57,71 @@ export class HomeComponent implements OnInit {
     dots: true,
     nav: false,
     responsive: {
-      0:{ items: 2 },
-      600:{ items: 3 },
-      1000:{ items: 6 }
+      0: { items: 2 },
+      600: { items: 3 },
+      1000: { items: 6 },
     },
-  }
+  };
 
   goToTestimonial(i: number) {
     this.testimonialEvent = i;
   }
 
   ngOnInit(): void {
-    
     this.apollo
       .query<any>({
-        query: queryUsersAndTestimonails
+        query: queryUsersAndTestimonails,
       })
-      .subscribe(
-        ({ data, loading }) => {
-          const usersQuery = data.userMany;
-          const testimonialsQuery = data.testimonialMany;
-          const m = new Map();
-          
-          // Assign testimonial query to users query
-          usersQuery.forEach((obj: any) => {
-            obj.testimonial; 
-            m.set(obj._id, obj);
-          });
-          
-          testimonialsQuery.forEach((obj: any) => {
-            Object.assign(m.get(obj.user), { testimonial: obj });
-          });
+      .subscribe(({ data, loading }) => {
+        const usersQuery = data.userMany;
+        const testimonialsQuery = data.testimonialMany;
+        const m = new Map();
 
-          // Return only users have testimonial
-          const usersFiltered = usersQuery.filter((users: any) => users.testimonial);
+        // Assign testimonial query to users query
+        usersQuery.forEach((obj: any) => {
+          obj.testimonial;
+          m.set(obj._id, obj);
+        });
 
-          this.queryUsers = usersFiltered;
-          this.users = usersFiltered;
+        testimonialsQuery.forEach((obj: any) => {
+          Object.assign(m.get(obj.user), { testimonial: obj });
+        });
 
+        // Return only users have testimonial
+        const usersFiltered = usersQuery.filter(
+          (users: any) => users.testimonial
+        );
 
-          const shuffle = (arrParam: any[]): any[] => {
-            let arr = arrParam.slice(), length = arr.length, temp, i;
+        this.queryUsers = usersFiltered;
+        this.users = usersFiltered;
 
-            while(length) {
-              i = Math.floor(Math.random() * length--);
-              temp = arr[length];
-              arr[length] = arr[i];
-              arr[i] = temp;
-            }
-        
-            return arr;
+        const shuffle = (arrParam: any[]): any[] => {
+          let arr = arrParam.slice(),
+            length = arr.length,
+            temp,
+            i;
+
+          while (length) {
+            i = Math.floor(Math.random() * length--);
+            temp = arr[length];
+            arr[length] = arr[i];
+            arr[i] = temp;
           }
 
-          this.usersCarousel = shuffle(usersFiltered).slice(0, 5);
-          
-          this.users.sort((a, b) => b.testimonial.interests - a.testimonial.interests);
+          return arr;
+        };
 
-          this.loading = loading;
-        }
-      );
+        this.usersCarousel = shuffle(usersFiltered).slice(0, 5);
+
+        this.users.sort(
+          (a, b) => b.testimonial.interests - a.testimonial.interests
+        );
+
+        this.filtersHome.get({
+          data: { filtered: this.users, raw: this.queryUsers },
+        });
+
+        this.loading = loading;
+      });
   }
-
 }
