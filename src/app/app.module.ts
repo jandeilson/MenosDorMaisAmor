@@ -12,13 +12,18 @@ import { GraphQLModule } from './graphql.module';
 import { AppComponent } from './app.component';
 import { ThanksComponent } from './views/thanks/thanks.component';
 import { HowItWorksComponent } from './views/howitworks/howitworks.component';
-
+import { PageAboutComponent } from './views/pages/about/about.component';
+import { PagePrivacyComponent } from './views/pages/privacy/privacy.component';
+import { PageContactComponent } from './views/pages/contact/contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ThanksComponent,
-    HowItWorksComponent
+    HowItWorksComponent,
+    PageAboutComponent,
+    PagePrivacyComponent,
+    PageContactComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,9 +33,9 @@ import { HowItWorksComponent } from './views/howitworks/howitworks.component';
     HomeModule,
     LayoutModule,
     HttpClientModule,
-    GraphQLModule
+    GraphQLModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { } 
+export class AppModule {}
