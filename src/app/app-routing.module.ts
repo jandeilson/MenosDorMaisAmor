@@ -15,7 +15,8 @@ import { PageContactComponent } from './views/pages/contact/contact.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   {
-    path: 'page', component: DefaultPageComponent,
+    path: 'page',
+    component: DefaultPageComponent,
     children: [
       { path: 'about', component: PageAboutComponent },
       { path: 'contact', component: PageContactComponent },
@@ -24,7 +25,8 @@ const routes: Routes = [
   },
   { path: 'testimonials', component: TestimonialsComponent },
   {
-    path: 'testimonial', component: DefaultPageComponent,
+    path: 'testimonial',
+    component: DefaultPageComponent,
     children: [
       { path: 'create', component: TestimonialFormComponent },
       { path: 'thanks', component: ThanksComponent },

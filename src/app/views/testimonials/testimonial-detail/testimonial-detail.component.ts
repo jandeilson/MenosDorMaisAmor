@@ -7,13 +7,14 @@ import {
 } from '../../../graphql/detail-testimonial';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'testimonial-detail',
   templateUrl: './testimonial-detail.component.html',
 })
 export class TestimonialDetailComponent implements OnInit {
   id: number;
   private sub: any;
-  loading: boolean = true;
+  loading = true;
 
   testimonial: any;
 
@@ -23,7 +24,7 @@ export class TestimonialDetailComponent implements OnInit {
     private router: Router
   ) {}
 
-  //TODO optimize this
+  // TODO optimize this
   getTestimonialUser(testimonial) {
     this.apollo
       .query<any>({
@@ -47,7 +48,7 @@ export class TestimonialDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe((params) => {
-      this.id = params['id'];
+      this.id = params.id;
     });
 
     this.apollo

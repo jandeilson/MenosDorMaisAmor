@@ -5,10 +5,17 @@ import gql from 'graphql-tag';
 @Injectable({
   providedIn: 'root',
 })
-
 export class TestimonialGQL extends Mutation {
   document = gql`
-    mutation ($user: MongoID!, $text: String!, $state: String!, $city: String!, $mediaPhotos: [JSON!], $category: String!, $help: Boolean!) {
+    mutation(
+      $user: MongoID!
+      $text: String!
+      $state: String!
+      $city: String!
+      $mediaPhotos: [JSON!]
+      $category: String!
+      $help: Boolean!
+    ) {
       testimonialCreateOne(
         record: {
           user: $user

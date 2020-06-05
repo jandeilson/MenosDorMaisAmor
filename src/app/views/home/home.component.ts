@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { queryUsersAndTestimonails } from '../../graphql/home';
-import { FiltersHome } from './filters/filters-home/filters-home.component';
+import { FiltersHomeComponent } from './filters/filters-home/filters-home.component';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'home',
   templateUrl: './home.component.html',
 })
@@ -12,42 +13,10 @@ export class HomeComponent implements OnInit {
   users: any[];
   usersCarousel: any[];
   queryUsers: any[];
-  loading: boolean = true;
-  testimonialsCarousel: any;
+  loading = true;
   testimonialEvent: any;
-  filterActive: string = 'f-most-interested';
-
-  constructor(private apollo: Apollo, private filtersHome: FiltersHome) {}
-
-  filterByStates(e: { target: { classList: string[] } }, testimonials: any) {
-    this.filtersHome
-      .states(e, testimonials)
-      .then(({ active, filtered }: { active: string; filtered: any[] }) => {
-        this.filterActive = active;
-        this.users = filtered;
-      });
-  }
-
-  filterByDate(e: { target: { classList: string[] } }, testimonials: any) {
-    this.filtersHome
-      .date(e, testimonials)
-      .then(({ active, filtered }: { active: string; filtered: any[] }) => {
-        this.filterActive = active;
-        this.users = filtered;
-      });
-  }
-
-  filterByInterests(e: { target: { classList: string[] } }) {
-    this.filtersHome
-      .interests(e)
-      .then(({ active, filtered }: { active: string; filtered: any[] }) => {
-        this.filterActive = active;
-        this.users = filtered;
-      });
-  }
-
-  // Owl Carousel options
-  customOptions: OwlOptions = {
+  filterActive = 'f-most-interested';
+  carouselOptions: OwlOptions = {
     loop: true,
     center: true,
     mouseDrag: true,
@@ -62,6 +31,38 @@ export class HomeComponent implements OnInit {
       1000: { items: 6 },
     },
   };
+
+  constructor(
+    private apollo: Apollo,
+    private FiltersHome: FiltersHomeComponent
+  ) {}
+
+  filterByStates(e: MouseEvent, testimonials: any) {
+    this.FiltersHome.states(e, testimonials).then(
+      ({ active, filtered }: { active: string; filtered: any[] }) => {
+        this.filterActive = active;
+        this.users = filtered;
+      }
+    );
+  }
+
+  filterByDate(e: MouseEvent, testimonials: any) {
+    this.FiltersHome.date(e, testimonials).then(
+      ({ active, filtered }: { active: string; filtered: any[] }) => {
+        this.filterActive = active;
+        this.users = filtered;
+      }
+    );
+  }
+
+  filterByInterests(e: MouseEvent) {
+    this.FiltersHome.interests(e).then(
+      ({ active, filtered }: { active: string; filtered: any[] }) => {
+        this.filterActive = active;
+        this.users = filtered;
+      }
+    );
+  }
 
   goToTestimonial(i: number) {
     this.testimonialEvent = i;
@@ -78,10 +79,7 @@ export class HomeComponent implements OnInit {
         const m = new Map();
 
         // Assign testimonial query to users query
-        usersQuery.forEach((obj: any) => {
-          obj.testimonial;
-          m.set(obj._id, obj);
-        });
+        usersQuery.forEach((obj: any) => m.set(obj._id, obj));
 
         testimonialsQuery.forEach((obj: any) => {
           Object.assign(m.get(obj.user), { testimonial: obj });
@@ -96,10 +94,10 @@ export class HomeComponent implements OnInit {
         this.users = usersFiltered;
 
         const shuffle = (arrParam: any[]): any[] => {
-          let arr = arrParam.slice(),
-            length = arr.length,
-            temp,
-            i;
+          const arr = arrParam.slice();
+          let length = arr.length;
+          let temp: any;
+          let i: number;
 
           while (length) {
             i = Math.floor(Math.random() * length--);
@@ -117,7 +115,7 @@ export class HomeComponent implements OnInit {
           (a, b) => b.testimonial.interests - a.testimonial.interests
         );
 
-        this.filtersHome.get({
+        this.FiltersHome.get({
           data: { filtered: this.users, raw: this.queryUsers },
         });
 

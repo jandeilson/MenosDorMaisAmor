@@ -1,6 +1,6 @@
-import { Query, Mutation } from "apollo-angular";
-import { Injectable } from "@angular/core";
-import gql from "graphql-tag";
+import { Query, Mutation } from 'apollo-angular';
+import { Injectable } from '@angular/core';
+import gql from 'graphql-tag';
 
 export interface Users {
   _id: number;
@@ -16,7 +16,7 @@ export interface Response {
 }
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 
 // Users Query

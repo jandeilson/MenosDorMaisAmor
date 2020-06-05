@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { StatesModalComponent } from '../../modals/states-modal/states-modal.component';
-import { StatesFilter } from './../states-filter/states-filter.component';
+import { StatesFilter } from '../states-filter/states-filter.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DateModalComponent } from '../../modals/date-modal/date-modal.component';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'filters-home',
   template: '',
 })
-export class FiltersHome {
+export class FiltersHomeComponent {
   filtered: any[];
   raw: any[];
 
@@ -22,10 +23,11 @@ export class FiltersHome {
   }: {
     data: { filtered: any[]; raw: any[] };
   }) {
-    (this.filtered = filtered), (this.raw = raw);
+    this.filtered = filtered;
+    this.raw = raw;
   }
 
-  public states(e: { target: { classList: string[] } }, testimonials: any) {
+  public states(e: MouseEvent, testimonials: any) {
     return new Promise((resolve, reject) => {
       this.StatesFilter.getStates();
 
@@ -52,12 +54,12 @@ export class FiltersHome {
           inline: 'nearest',
         });
 
-        resolve({ active: e.target.classList[1], filtered: filtered });
+        resolve({ active: (e.target as HTMLElement).classList[1], filtered });
       });
     });
   }
 
-  public date(e: { target: { classList: string[] } }, testimonials: any) {
+  public date(e: MouseEvent, testimonials: any) {
     return new Promise((resolve, reject) => {
       const modalRef = this.modalService.open(DateModalComponent, {
         centered: true,
@@ -77,7 +79,10 @@ export class FiltersHome {
           inline: 'nearest',
         });
 
-        resolve({ active: e.target.classList[1], filtered: result });
+        resolve({
+          active: (e.target as HTMLElement).classList[1],
+          filtered: result,
+        });
       });
     });
   }
@@ -87,7 +92,10 @@ export class FiltersHome {
       const usersFiltered = this.raw.sort(
         (a, b) => b.testimonial.interests - a.testimonial.interests
       );
-      resolve({ active: e.target.classList[1], filtered: usersFiltered });
+      resolve({
+        active: (e.target as HTMLElement).classList[1],
+        filtered: usersFiltered,
+      });
     });
   }
 }

@@ -1,28 +1,19 @@
-import { Component } from "@angular/core";
-import { FormGroup, FormControl, Validators, FormArray } from "@angular/forms";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { BrazilianStatesGQL, States } from "../../../graphql/states";
-import { BrazilianCitiesGQL, Cities } from "../../../graphql/cities";
-import { TestimonialGQL } from "src/app/graphql/testimonial-form";
-import { HttpClient, HttpEventType } from "@angular/common/http";
-import { Router } from "@angular/router";
-import { UserGQLMutation } from "../../../graphql/users";
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { BrazilianStatesGQL, States } from '../../../graphql/states';
+import { BrazilianCitiesGQL, Cities } from '../../../graphql/cities';
+import { TestimonialGQL } from 'src/app/graphql/testimonial-form';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { UserGQLMutation } from '../../../graphql/users';
 
 @Component({
-  selector: "testimonial-form",
-  templateUrl: "./testimonial-form.component.html",
+  selector: 'testimonial-form',
+  templateUrl: './testimonial-form.component.html',
 })
 export class TestimonialFormComponent {
-  loading: boolean = false;
-  formStep: boolean = false;
-  formStepText: string = "Prosseguir";
-  states: Observable<States[]>;
-  cities: Cities[];
-  stateId: string;
-  filesToUpload: Array<File> = [];
-  fileUploadProgress: number = 0;
-  phoneMask: number;
 
   constructor(
     private testimonialGQL: TestimonialGQL,
@@ -33,12 +24,60 @@ export class TestimonialFormComponent {
     private router: Router
   ) {}
 
+  get fieldValidation() {
+    return {
+      // Testimonial group
+      testimonial: this.form.get('testimonial.textTestimonial'),
+      state: this.form.get('testimonial.state'),
+      city: this.form.get('testimonial.city'),
+      category: this.form.get('testimonial.category'),
+      help: this.form.get('testimonial.help'),
+
+      // User Group
+      firstName: this.form.get('user.firstName'),
+      lastName: this.form.get('user.lastName'),
+      email: this.form.get('user.email'),
+      phone: this.form.get('user.phone'),
+    };
+  }
+
+  get addMediaPhotos(): FormArray {
+    return this.form.get('testimonial.mediaPhotos') as FormArray;
+  }
+  loading = false;
+  formStep = false;
+  formStepText = 'Prosseguir';
+  states: Observable<States[]>;
+  cities: Cities[];
+  stateId: string;
+  filesToUpload: Array<File> = [];
+  fileUploadProgress = 0;
+  phoneMask: number;
+
+  // Form groups
+  form = new FormGroup({
+    testimonial: new FormGroup({
+      textTestimonial: new FormControl('', Validators.required),
+      mediaPhotos: new FormArray([]),
+      state: new FormControl('', Validators.required),
+      city: new FormControl('', Validators.required),
+      category: new FormControl('love', Validators.required),
+      help: new FormControl('', Validators.required),
+    }),
+    user: new FormGroup({
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl('', Validators.required),
+    }),
+  });
+
   formSteps() {
     window.scroll(0, 0);
     this.formStep = !this.formStep;
     !this.formStep
-      ? (this.formStepText = "Prosseguir")
-      : (this.formStepText = "Anterior");
+      ? (this.formStepText = 'Prosseguir')
+      : (this.formStepText = 'Anterior');
 
     this.states = this.brazilianStates
       .watch()
@@ -53,13 +92,13 @@ export class TestimonialFormComponent {
     this.loading = !this.loading;
     const elSelected = event.target;
     const value = elSelected.options[elSelected.selectedIndex].getAttribute(
-      "state-id"
+      'state-id'
     );
     const stateId = value;
 
     this.brazilianCitiesGQL
       .watch({
-        stateId: stateId,
+        stateId,
       })
       .valueChanges.subscribe(({ data, loading }) => {
         this.loading = loading;
@@ -67,57 +106,18 @@ export class TestimonialFormComponent {
       });
   }
 
-  // Form groups
-  form = new FormGroup({
-    testimonial: new FormGroup({
-      textTestimonial: new FormControl("", Validators.required),
-      mediaPhotos: new FormArray([]),
-      state: new FormControl("", Validators.required),
-      city: new FormControl("", Validators.required),
-      category: new FormControl("love", Validators.required),
-      help: new FormControl("", Validators.required),
-    }),
-    user: new FormGroup({
-      firstName: new FormControl("", Validators.required),
-      lastName: new FormControl("", Validators.required),
-      email: new FormControl("", [Validators.required, Validators.email]),
-      phone: new FormControl("", Validators.required),
-    }),
-  });
-
-  get fieldValidation() {
-    return {
-      // Testimonial group
-      testimonial: this.form.get("testimonial.textTestimonial"),
-      state: this.form.get("testimonial.state"),
-      city: this.form.get("testimonial.city"),
-      category: this.form.get("testimonial.category"),
-      help: this.form.get("testimonial.help"),
-
-      // User Group
-      firstName: this.form.get("user.firstName"),
-      lastName: this.form.get("user.lastName"),
-      email: this.form.get("user.email"),
-      phone: this.form.get("user.phone"),
-    };
-  }
-
-  get addMediaPhotos(): FormArray {
-    return this.form.get("testimonial.mediaPhotos") as FormArray;
-  }
-
   uploadFiles(event: any) {
-    this.filesToUpload = <Array<File>>event.target.files;
+    this.filesToUpload = event.target.files as Array<File>;
     const files: Array<File> = this.filesToUpload;
 
     if (files) {
-      for (let file of files) {
-        let reader = new FileReader();
+      for (const file of files) {
+        const reader = new FileReader();
         reader.onload = (e: any) => {
           this.addMediaPhotos.push(
             new FormControl({
               fileName: file.name,
-              //url: e.target.result
+              // url: e.target.result
             })
           );
         };
@@ -128,14 +128,14 @@ export class TestimonialFormComponent {
     const formData: any = new FormData();
 
     for (let i = 0; i < files.length; i++) {
-      formData.append("uploads[]", files[i], files[i]["name"]);
+      formData.append('uploads[]', files[i], files[i].name);
     }
 
-    //TODO: ENV Api URL
+    // TODO: ENV Api URL
     this.http
-      .post("http://localhost:3000/upload", formData, {
+      .post('http://localhost:3000/upload', formData, {
         reportProgress: true,
-        observe: "events",
+        observe: 'events',
       })
       .subscribe((events: any) => {
         if (events.type === HttpEventType.UploadProgress) {
@@ -173,7 +173,7 @@ export class TestimonialFormComponent {
           help: formTestimonial.help,
         })
         .subscribe(() => {
-          this.router.navigate(["/testimonial/thanks"]);
+          this.router.navigate(['/testimonial/thanks']);
         });
     };
   }

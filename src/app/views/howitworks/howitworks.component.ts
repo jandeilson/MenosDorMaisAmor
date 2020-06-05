@@ -3,16 +3,15 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'howitworks',
   templateUrl: './howitworks.component.html',
-  styleUrls: ['./howitworks.component.css']
+  styleUrls: ['./howitworks.component.css'],
 })
 export class HowItWorksComponent implements OnInit {
-
-  constructor() { }
+  constructor() {}
 
   @Output() lifecycle = new EventEmitter();
 
-  count: number = 0;
-  imgLoad: boolean = true; 
+  count = 0;
+  imgLoad = true;
 
   imgOnLoad() {
     this.imgLoad = false;
@@ -21,12 +20,11 @@ export class HowItWorksComponent implements OnInit {
   step(progress: any) {
     this.imgLoad = !this.imgLoad;
 
-    let size = 20;
+    const size = 20;
 
     this.count += size;
 
     if (this.count >= size) {
-      
       let width = this.count;
 
       // progress.style.width = size + '%';
@@ -35,17 +33,12 @@ export class HowItWorksComponent implements OnInit {
         // this.count = 0;
         localStorage.setItem('start', 'off');
         this.lifecycle.emit();
-      } else if (width <= 100){
+      } else if (width <= 100) {
         width += size;
         progress.style.width = width + '%';
-  
       }
     }
-
   }
 
-  ngOnInit(): void {
-
-  }
-
+  ngOnInit(): void {}
 }

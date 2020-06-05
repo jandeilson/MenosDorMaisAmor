@@ -18,7 +18,7 @@ import { InterestedButtonComponent } from '../../shared/interestedButton/interes
 
 import { InterestsGQL } from '../../graphql/interests';
 import { StatesFilter } from './filters/states-filter/states-filter.component';
-import { FiltersHome } from './filters/filters-home/filters-home.component';
+import { FiltersHomeComponent } from './filters/filters-home/filters-home.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +30,8 @@ import { FiltersHome } from './filters/filters-home/filters-home.component';
     DateFilterModalComponent,
     DateModalComponent,
     StatesFilter,
+    FiltersHomeComponent,
     InterestedButtonComponent,
-    
   ],
   imports: [
     CommonModule,
@@ -39,16 +39,9 @@ import { FiltersHome } from './filters/filters-home/filters-home.component';
     BrowserAnimationsModule,
     CarouselModule,
     FormsModule,
-    NgbModule
+    NgbModule,
   ],
-  providers: [
-    NgbActiveModal,
-    FiltersHome,
-    StatesFilter,
-    InterestsGQL
-  ],
-  entryComponents: [
-    StatesFilterModalComponent
-  ]
+  providers: [NgbActiveModal, FiltersHomeComponent, StatesFilter, InterestsGQL],
+  entryComponents: [StatesFilterModalComponent],
 })
-export class HomeModule { }
+export class HomeModule {}
