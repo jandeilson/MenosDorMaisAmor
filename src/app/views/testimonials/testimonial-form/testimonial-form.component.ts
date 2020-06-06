@@ -11,6 +11,7 @@ import { UserGQLMutation } from '../../../graphql/users';
 import { environment } from '../../../../environments/environment';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'testimonial-form',
   templateUrl: './testimonial-form.component.html',
 })
