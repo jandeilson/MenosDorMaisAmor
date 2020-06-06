@@ -89,9 +89,13 @@ export class HomeComponent implements OnInit {
         const usersFiltered = usersQuery.filter(
           (users: any) => users.testimonial
         );
+        // Return only approved testimonial
+        const onlyApproved = usersFiltered.filter(
+          (user: any) => user.testimonial.approved === true
+        );
 
-        this.queryUsers = usersFiltered;
-        this.users = usersFiltered;
+        this.queryUsers = onlyApproved;
+        this.users = onlyApproved;
 
         const shuffle = (arrParam: any[]): any[] => {
           const arr = arrParam.slice();
@@ -109,7 +113,7 @@ export class HomeComponent implements OnInit {
           return arr;
         };
 
-        this.usersCarousel = shuffle(usersFiltered).slice(0, 5);
+        this.usersCarousel = shuffle(onlyApproved).slice(0, 5);
 
         this.users.sort(
           (a, b) => b.testimonial.interests - a.testimonial.interests

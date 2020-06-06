@@ -18,6 +18,7 @@ export const queryUsersAndTestimonails = gql`
       category
       interests
       createdAt
+      approved
     }
   }
 `;
