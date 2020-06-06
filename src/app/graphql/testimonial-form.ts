@@ -15,6 +15,7 @@ export class TestimonialGQL extends Mutation {
       $mediaPhotos: [JSON!]
       $category: String!
       $help: Boolean!
+      $approved: Boolean!
     ) {
       testimonialCreateOne(
         record: {
@@ -25,6 +26,7 @@ export class TestimonialGQL extends Mutation {
           media: { photo: $mediaPhotos }
           category: $category
           help: $help
+          approved: $approved
         }
       ) {
         record {
@@ -33,13 +35,11 @@ export class TestimonialGQL extends Mutation {
           state
           city
           media
+          category
+          help
+          approved
         }
       }
     }
   `;
 }
-
-
-
-
-

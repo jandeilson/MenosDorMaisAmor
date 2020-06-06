@@ -14,7 +14,6 @@ import { UserGQLMutation } from '../../../graphql/users';
   templateUrl: './testimonial-form.component.html',
 })
 export class TestimonialFormComponent {
-
   constructor(
     private testimonialGQL: TestimonialGQL,
     private UserGQLMutation: UserGQLMutation,
@@ -157,6 +156,7 @@ export class TestimonialFormComponent {
       lastName: formUser.lastName,
       email: formUser.email,
       phone: formUser.phone,
+      helper: false,
     }).subscribe((response) => {
       callMutationTestimonial(response.data);
     });
@@ -171,6 +171,7 @@ export class TestimonialFormComponent {
           mediaPhotos: formTestimonial.mediaPhotos,
           category: formTestimonial.category,
           help: formTestimonial.help,
+          approved: false,
         })
         .subscribe(() => {
           this.router.navigate(['/testimonial/thanks']);
