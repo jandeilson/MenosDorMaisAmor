@@ -15,6 +15,7 @@ import { StatesModalComponent } from './modals/states-modal/states-modal.compone
 import { DateFilterModalComponent } from './filters/date-filter-modal/date-filter-modal.component';
 import { DateModalComponent } from './modals/date-modal/date-modal.component';
 import { InterestedButtonComponent } from '../../shared/interestedButton/interested-button.component';
+import { FeedbackModalComponent } from './modals/feedback-modal/feedback-modal.component';
 
 import { InterestsGQL } from '../../graphql/interests';
 import { StatesFilter } from './filters/states-filter/states-filter.component';
@@ -29,6 +30,7 @@ import { FiltersHomeComponent } from './filters/filters-home/filters-home.compon
     StatesModalComponent,
     DateFilterModalComponent,
     DateModalComponent,
+    FeedbackModalComponent,
     StatesFilter,
     FiltersHomeComponent,
     InterestedButtonComponent,

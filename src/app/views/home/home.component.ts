@@ -3,6 +3,9 @@ import { Apollo } from 'apollo-angular';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { queryUsersAndTestimonails } from '../../graphql/home';
 import { FiltersHomeComponent } from './filters/filters-home/filters-home.component';
+import { StatesModalComponent } from './modals/states-modal/states-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { FeedbackModalComponent } from './modals/feedback-modal/feedback-modal.component';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -34,7 +37,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private apollo: Apollo,
-    private FiltersHome: FiltersHomeComponent
+    private FiltersHome: FiltersHomeComponent,
+    private modalService: NgbModal
   ) {}
 
   filterByStates(e: MouseEvent, testimonials: any) {
@@ -125,5 +129,25 @@ export class HomeComponent implements OnInit {
 
         this.loading = loading;
       });
+
+    // Feedback
+    const feedbackStatus = localStorage.getItem('feedback');
+    if (feedbackStatus !== undefined) {
+      localStorage.setItem('feedback', 'on');
+    }
+
+    if (localStorage.getItem('feedback') === 'on') {
+      setInterval(() => {
+        if (localStorage.getItem('feedback') !== 'off') {
+          const feedbackModal = this.modalService.open(FeedbackModalComponent, {
+            centered: true,
+          });
+
+          feedbackModal.result.finally(() =>
+            localStorage.setItem('feedback', 'off')
+          );
+        }
+      }, 10000);
+    }
   }
 }
