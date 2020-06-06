@@ -8,6 +8,7 @@ import { TestimonialGQL } from 'src/app/graphql/testimonial-form';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserGQLMutation } from '../../../graphql/users';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'testimonial-form',
@@ -132,7 +133,7 @@ export class TestimonialFormComponent {
 
     // TODO: ENV Api URL
     this.http
-      .post('http://localhost:3000/upload', formData, {
+      .post(environment.apiUrl + '/upload', formData, {
         reportProgress: true,
         observe: 'events',
       })

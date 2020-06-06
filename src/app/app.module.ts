@@ -15,6 +15,8 @@ import { HowItWorksComponent } from './views/howitworks/howitworks.component';
 import { PageAboutComponent } from './views/pages/about/about.component';
 import { PagePrivacyComponent } from './views/pages/privacy/privacy.component';
 import { PageContactComponent } from './views/pages/contact/contact.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { PageContactComponent } from './views/pages/contact/contact.component';
     LayoutModule,
     HttpClientModule,
     GraphQLModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent],
