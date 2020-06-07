@@ -3,7 +3,7 @@
   "short_name": "- Dor + Amor",
   "theme_color": "#47dc56",
   "background_color": "#ffffff",
-  "orientation": "portrait-primary",
+  "orientation": "portrait",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
