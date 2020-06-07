@@ -4,7 +4,7 @@
   "author": "Jandeilson De Sousa Barbosa",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -29,6 +29,7 @@
     "apollo-client": "^2.6.0",
     "apollo-link": "^1.2.11",
     "bootstrap": "^4.4.1",
+    "express": "^4.17.1",
     "graphql": "^14.5.0",
     "graphql-tag": "^2.10.0",
     "libphonenumber-js": "^1.7.52",
