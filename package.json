@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Jandeilson De Sousa Barbosa",
   "engines": {
-    "yarn": "1.12.4",
+    "yarn": "1.22.4",
     "node": "12.17.0"
   },
   "scripts": {
