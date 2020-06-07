@@ -137,12 +137,15 @@ export class HomeComponent implements OnInit {
     }
 
     if (localStorage.getItem('feedback') === 'on') {
-      localStorage.setItem('feedback', 'off');
-      if (localStorage.getItem('feedback') !== 'off') {
-        this.modalService.open(FeedbackModalComponent, {
-          centered: true,
-        });
-      }
+      setTimeout(() => {
+        if (localStorage.getItem('feedback') !== 'off') {
+          this.modalService.open(FeedbackModalComponent, {
+            centered: true,
+          });
+        }
+
+        localStorage.setItem('feedback', 'off');
+      }, 15000);
     }
   }
 }
