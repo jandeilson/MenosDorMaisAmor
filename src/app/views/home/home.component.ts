@@ -139,13 +139,10 @@ export class HomeComponent implements OnInit {
     if (localStorage.getItem('feedback') === 'on') {
       setInterval(() => {
         if (localStorage.getItem('feedback') !== 'off') {
-          const feedbackModal = this.modalService.open(FeedbackModalComponent, {
+          localStorage.setItem('feedback', 'off');
+          this.modalService.open(FeedbackModalComponent, {
             centered: true,
           });
-
-          feedbackModal.result.finally(() =>
-            localStorage.setItem('feedback', 'off')
-          );
         }
       }, 15000);
     }
