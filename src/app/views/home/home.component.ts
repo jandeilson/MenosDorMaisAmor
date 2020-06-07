@@ -147,7 +147,7 @@ export class HomeComponent implements OnInit {
             localStorage.setItem('feedback', 'off')
           );
         }
-      }, 10000);
+      }, 15000);
     }
   }
 }
